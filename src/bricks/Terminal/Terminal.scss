@@ -1,10 +1,36 @@
 .Terminal{
-    width: 800px;
-    height: 600px;
+    width: 640px;
+    height: 380px;
 
     color: #ffffffcc;
     background-color: black;
 
     font-family: 'Courier New', Courier, monospace;
-    font-size: 12px;
+    font-size: 13px;
+
+    outline: none;
+
+    position: relative;
+    white-space: pre;
+
+    .commandResult {
+        color: #ffffff99;
+    }
+
+    .commandError {
+        color: #cc0000;
+    }
+
+    .notSelectable {
+        -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none; /* Safari */
+        -khtml-user-select: none; /* Konqueror HTML */
+        -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+        user-select: none; /* Non-prefixed version, currently */
+    }
+
+    .userName {
+        color: yellow;
+    }
 }

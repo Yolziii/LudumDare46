@@ -1,0 +1,40 @@
+{
+    "help": {
+        "description": "Display information about available (to current user) commands",
+        "options": {
+        }
+    },
+    "ls": {
+        "description": "List information about the FILEs (in current directory)",
+        "options": {
+        }
+    },
+    "cd": {
+        "description": "Change the current directory",
+        "options": [
+            {
+                "name" : "[target directory]",
+                "description" : "Directory to move"
+            }
+        ],
+        "examples": [
+            {
+                "example": "cd ../",
+                "description": "Move to parent directory"
+            },
+            {
+                "example": "cd ~",
+                "description": "Move to current user`s home directory"
+            },
+            {
+                "example": "cd music",
+                "description": "Move to 'music' directory"
+            }
+        ]
+    },
+    "cat": {
+        "description": "Output FILE content to terminal",
+        "options": {
+        }
+    }
+}
