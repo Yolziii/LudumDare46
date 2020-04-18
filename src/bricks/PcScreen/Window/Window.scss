@@ -1,0 +1,24 @@
+.Window {
+    height: max-content;
+    width: max-content;
+    
+    &-title {
+        width: 100%;
+        height: 25px;
+
+        display: flex;
+        align-items: center;
+
+        background: linear-gradient(270deg, #7e88ac, #50535e);
+
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 16px;
+
+        color: #000000cc;
+
+        span {
+            margin-bottom: 2px;
+        }
+
+    }
+}
