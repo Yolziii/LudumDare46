@@ -21,19 +21,17 @@
     },
     "win": {
         "phrases": [
-            {"duration": 3000, "typing": true},
-            {"duration": 1000, "pause": true},
+            {"duration": 0, "typing": true}, 
+            {"duration": 0, "pause": true},
             {"text": "intro", "duration": 500},
             {"text": "Let me check...", "duration": 2000},
             {"duration": 4000, "pause": true},
-            "Congratulations! It is in save now ))",
-            {"duration": 1000, "pause": true},
-            "We are done here :)",
-            {"duration": 2000, "pause": true},
-            {"text": "Unbelievable! It is still alive! We did everything right, be proud of yourself!", "duration": 2000},
+            {"text": "Unbelievable! I'm still alive! I thought they will kill me...", "duration": 2000},
+            "BTW! I'm not cubic, I'm circle ))",
+            {"shell": "cat ascii/win"}, 
             {"duration": 3000, "pause": true},
-            "I must to live now...",
-            {"text": "Keep yourself alive ) Buy!", "duration": 3000}
+            "Thank's for my saving! I must to go now.",
+            {"text": "So, keep yourself alive as long as you can ) See you soon!", "duration": 3000}
             
         ],
         "duration": 1000

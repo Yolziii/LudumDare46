@@ -54,6 +54,10 @@ export class CommandString implements ITerminalString {
         if (length === 0) return;
         this.content = this.content.substring(0, length - 1);
     }
+    
+    public setText(text: string) {
+        this.content = text;
+    }
 }
 
 export class TerminalStore {

@@ -13,7 +13,11 @@ export class ChatController {
         this.onPaste = this.onPaste.bind(this);
         this.onKey = this.onKey.bind(this);
         this.botTyping = this.botTyping.bind(this);
+        this.checkLogOffset = this.checkLogOffset.bind(this);
+
         this.blinkCursor();
+
+        store.initController(this);
     }
 
     botTyping(isTypeing: boolean) {
@@ -22,6 +26,7 @@ export class ChatController {
 
     botSay(text: string) {
         this.store.addMessage(this.store.guide, text);
+        this.checkLogOffset();
     }
 
     blinkCursor() {
@@ -39,7 +44,7 @@ export class ChatController {
     }
 
     public onKey(event: KeyboardEvent<HTMLElement>): void {
-        console.log(`Press key: ${event.key}[${event.keyCode.toString()}]`);
+        //console.log(`Press key: ${event.key}[${event.keyCode.toString()}]`);
         switch (event.keyCode) {
             case KeyCode.Up: 
                 break;
@@ -69,23 +74,23 @@ export class ChatController {
 
         if (this.textRef === null) return;
         this.textRef.scrollLeft = this.textRef.scrollWidth - this.textRef.clientWidth;
-        console.log(`${this.textRef.scrollLeft}`);
+        //console.log(`${this.textRef.scrollLeft}`);
     }
 
     public onFocusIn() {
-        console.log('ChatController.onFocusIn()');
+        //console.log('ChatController.onFocusIn()');
         this.store.focused = true;
     }
 
     public onFocusOut() {
-        console.log('ChatController.onFocusOut()');
+        //console.log('ChatController.onFocusOut()');
         this.store.focused = false;
     }
 
-    private checkLogOffset() {
+    public checkLogOffset() {
         if (this.logRef === null) return;
         this.logRef.scrollTop = this.logRef.scrollHeight - this.logRef.clientHeight;
-        console.log(`${this.logRef.scrollLeft}`);
+        //console.log(`${this.logRef.scrollLeft}`);
     }
 
     public setTextRef(textRef: HTMLDivElement) {

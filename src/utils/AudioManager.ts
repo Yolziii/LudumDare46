@@ -2,6 +2,7 @@ class AudionManager {
     public errorAudio = new Audio(process.env.PUBLIC_URL + '/sound/error.wav');
     public playerMessage = new Audio(process.env.PUBLIC_URL + '/sound/message.wav?v=2');
     public guideMessage = new Audio(process.env.PUBLIC_URL + '/sound/message2.wav');
+    public guideWin = new Audio(process.env.PUBLIC_URL + '/sound/win.wav');
 
     public play(audio: HTMLAudioElement) {
         audio.autoplay = true;

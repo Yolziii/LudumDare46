@@ -1,6 +1,6 @@
 //import commandList from './commands.json';
 
-import { TerminalStore } from './TernimalStore';
+import { TerminalStore } from '../TernimalStore';
 
 export enum TerminalCommands {
     Ls = 'ls',

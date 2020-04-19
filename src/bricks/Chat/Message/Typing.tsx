@@ -50,6 +50,7 @@ class Typing extends Component<ITypingProps> {
                     return (
                         // eslint-disable-next-line jsx-a11y/alt-text
                         <img 
+                            key={index}
                             src={process.env.PUBLIC_URL + '/img/point.png'} 
                             className={point === 1 ? 'Typing-top' : 'Typing-bottom'} />
                     )

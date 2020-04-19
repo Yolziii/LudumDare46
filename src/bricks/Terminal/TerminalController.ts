@@ -1,4 +1,4 @@
-import { TerminalStore, CommandString } from "./TernimalStore";
+import { TerminalStore, CommandString, ITerminalString, SimpleString } from "./TernimalStore";
 import { KeyboardEvent } from "react";
 import { Commander } from "./Commander";
 import { KeyCode } from "../../utils/KeyCode";
@@ -7,7 +7,7 @@ export class TerminalController {
     private commander: Commander;
 
     constructor(private store: TerminalStore) {
-        this.commander = new Commander(store);
+        this.commander = new Commander(store, this);
 
         this.onKey = this.onKey.bind(this);
         this.onPaste = this.onPaste.bind(this);
@@ -61,6 +61,24 @@ export class TerminalController {
                 break;
         }
     }
+
+    public runCommand(cmd: string) {
+        if (this.isCommand(this.store.current)) {
+            this.store.current.setText(cmd);
+        } else {
+            this.store.addString(new CommandString(this.store.user, cmd));
+        }
+        this.commander.run(cmd);
+    }
+
+    public showString(str: string) {
+        this.store.addString(new SimpleString(str));
+    }
+
+    isCommand = (sentense: ITerminalString): sentense is CommandString =>
+        (sentense as CommandString).addChar !== undefined;
+
+    
 
     private blinkCursor(): void {
         setTimeout(() => {

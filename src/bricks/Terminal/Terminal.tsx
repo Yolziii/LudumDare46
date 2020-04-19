@@ -4,26 +4,18 @@ import Cursor from './Cursor/Cursor';
 import { TerminalStore } from './TernimalStore';
 import { TerminalController } from './TerminalController';
 import { observer } from 'mobx-react';
-import { User } from './User';
-
 
 interface ITerminalProps {
     store: TerminalStore;
+    controller: TerminalController;
 }
 
 @observer
-class Terminal extends Component {
-    store: TerminalStore;
-    controller: TerminalController;
-
+class Terminal extends Component<ITerminalProps> {
     myRef: any = null;
 
-    constructor(props: {}) {
+    constructor(props: ITerminalProps) {
         super(props);
-
-        this.store = new TerminalStore(new User('guest'));
-        this.controller = new TerminalController(this.store);
-
         this.myRef = React.createRef();
     }
 
@@ -32,7 +24,7 @@ class Terminal extends Component {
     }
 
     getContent() {
-        return {__html: this.store.content};
+        return {__html: this.props.store.content};
     }
 
     render() {
@@ -40,14 +32,13 @@ class Terminal extends Component {
             <div 
                 className="Terminal" 
                 tabIndex={0} 
-                onKeyDown={this.controller.onKey}
-                onPaste={this.controller.onPaste}
-                onFocus={this.controller.onFocusIn}
-                onBlur={this.controller.onFocusOut}
+                onKeyDown={this.props.controller.onKey}
+                onPaste={this.props.controller.onPaste}
+                onFocus={this.props.controller.onFocusIn}
+                onBlur={this.props.controller.onFocusOut}
                 
                 ref={this.myRef}>
-                <Cursor store={this.store}
-                />
+                <Cursor store={this.props.store}/>
                 <div dangerouslySetInnerHTML={this.getContent()}></div>
                 
             </div>

@@ -1,5 +1,6 @@
 import { observable, computed, autorun } from "mobx"
 import { AudioManager } from "../../utils/AudioManager";
+import { ChatController } from "./ChatController";
 
 const MAX_LENGTH = 30;
 
@@ -18,6 +19,8 @@ export class ChatStore {
     player = new ChatUser('guest');
     guide = new ChatUser('qubick');
 
+    private controller: ChatController | null = null;
+
     @observable messages: ChatMessage[] = [];
     @observable cursorVisible = false;
 
@@ -34,12 +37,18 @@ export class ChatStore {
         autorun(() => this.checkBotTypeing());
     }
 
+    initController(controller: ChatController) {
+        this.controller = controller;
+    }
+
     checkBotTypeing() {
         if (this.botTyping) {
             if (!this.messages.includes(this.typingMessage)) this.messages.push(this.typingMessage);
         } else {
             this.removeMessage(this.typingMessage);
         }
+
+        if (this.controller) this.controller.checkLogOffset();
     }
 
     public addMessage(user: ChatUser, text: string, typing: boolean=false) {
@@ -47,6 +56,7 @@ export class ChatStore {
         else AudioManager.play(AudioManager.guideMessage);
         const message = new ChatMessage(user, text, typing);
         this.messages.push(message);
+        this.checkBotTypeing();
     }
 
     public removeMessage(msg: ChatMessage) {

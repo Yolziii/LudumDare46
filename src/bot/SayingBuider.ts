@@ -28,9 +28,10 @@ export type PartsType = { [key: string]: string[] }
 export type SimplePartType = SayPart | string | string[];
 export type CustomDurationSentenseType = {text: string, duration: number}
 export type ExplicitTypingType = {typing: boolean, duration: number}
+export type TerminalCommandType = {shell: string}
 export type ExplicitPauseType = {pause: boolean, duration: number}
 //sexport type MergesPhraseType = { merge: SimplePartType[], duration?: number }
-export type SentenseType = SimplePartType | CustomDurationSentenseType | ExplicitTypingType | ExplicitPauseType;
+export type SentenseType = SimplePartType | CustomDurationSentenseType | ExplicitTypingType | ExplicitPauseType | TerminalCommandType;
 export type PhrasesType = {phrases: SentenseType[], duration?: number}
 export type VariantsType = {variants: SentenseType}
 export type ScriptLineType = VariantsType | PhrasesType | SentenseType
@@ -87,7 +88,13 @@ export class Sentense {
             this.one = '';
             this.duration = sentense.duration;
         }
-         else {
+        else if (this.isTerminalCommand(sentense)) {
+            this.actionType = BotActionType.TerminalCommand;
+            this.kind = SentenceKind.One;
+            this.one = sentense.shell;
+            this.duration = 0;
+        }
+        else {
             this.actionType = BotActionType.SaySomething;
             this.kind = SentenceKind.One;
             this.one = sentense as string;
@@ -108,6 +115,8 @@ export class Sentense {
         (sentense as ExplicitTypingType).typing !== undefined;
     isExplicitPause = (sentense: SentenseType): sentense is ExplicitPauseType =>
         (sentense as ExplicitPauseType).pause !== undefined;
+    isTerminalCommand = (sentense: SentenseType): sentense is TerminalCommandType =>
+        (sentense as TerminalCommandType).shell !== undefined;
 
     chooseOne() {
         switch (this.kind) {
@@ -188,7 +197,7 @@ export class SayingBuilder {
         else totalExpressiveChars = 4;
 
         let lastChar = text.substr(text.length-1, 1);
-        if ([')', '(', '/', '\]'].includes(lastChar)) return text;
+        if ([')', '(', '/', '\\'].includes(lastChar)) return text;
         if (!['!', '?', ','].includes(lastChar)) lastChar = '';
         
         const char = lastChar ? lastChar : this.getExpresiveChar(type, mood);

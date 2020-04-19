@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Log.scss';
-import { ChatStore, ChatUser, ChatMessage } from '../ChatStore';
+import { ChatStore, ChatMessage } from '../ChatStore';
 import { observer } from 'mobx-react';
 import Message from '../Message/Message';
 import { ChatController } from '../ChatController';

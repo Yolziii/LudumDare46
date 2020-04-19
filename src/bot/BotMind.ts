@@ -2,11 +2,13 @@ import { BotModel } from "./BotModel";
 import { ChatController } from "../bricks/Chat/ChatController";
 import { IPlayerAction } from "../player/PlayerMind";
 import { Sentense } from "./SayingBuider";
+import { TerminalController } from "../bricks/Terminal/TerminalController";
 
 export enum BotActionType {
     Typing, 
     WaitForPlayer,
     SaySomething,
+    TerminalCommand,
     StopThinking
 }
 
@@ -32,7 +34,12 @@ export class BotMind {
     taskIndex = -1;
     tasks: Task[] = [];
 
-    constructor(private model: BotModel, private chat: ChatController, private goal: IBotGoal) {
+    constructor(
+        private model: BotModel, 
+        private chat: ChatController, 
+        private terminal: TerminalController, 
+        private goal: IBotGoal) 
+    {
         this.think = this.think.bind(this);
         this.typeText = this.typeText.bind(this);
         this.waitForPlayer = this.waitForPlayer.bind(this);
@@ -68,6 +75,9 @@ export class BotMind {
             case BotActionType.SaySomething:
                 this.saySomething(task.action.sentense as Sentense);
                 break;
+            case BotActionType.TerminalCommand: 
+                this.typeCommand((task.action.sentense as Sentense).one);
+                break;
         }
     } 
 
@@ -92,6 +102,11 @@ export class BotMind {
             this.chat.botSay(message);
             this.think();
         }, toSay.duration);
+    }
+
+    typeCommand(cmd: string) {
+        this.terminal.runCommand(cmd);
+        this.think();
     }
 
     decideWhatToDo() {
