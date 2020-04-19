@@ -83,6 +83,7 @@ export class TerminalStore {
     @computed get current() { return this.strings[this.currentIndex] }
 
     @observable currentIndex = 0;
+    @observable focused = false;
 
     public addString(string: ITerminalString) {
         this.strings.push(string);

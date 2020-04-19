@@ -1,0 +1,32 @@
+.Typing {
+    &-bigOne {
+        font-size: 20px;
+    }
+
+    .trandition {
+        width: 5px;
+        height: 5px;
+        margin: 0px 1px;
+
+        -webkit-transition-property: transform, -webkit-transform;
+        -webkit-transition-duration: 0.25s;
+        -webkit-transition-timing-function: ease-in-out;
+        transition-property: transform, -webkit-transform;
+        transition-duration: 0.25s;
+        transition-timing-function: ease-in-out;
+    }
+
+    &-bottom {
+        transform: scale(1, 1);
+        -webkit-transform: scale(1,1);
+
+        @extend .trandition;
+    }
+
+    &-top {
+        transform: scale(1.5, 1.5);
+        -webkit-transform: scale(1.5, 1.5);
+
+        @extend .trandition;
+    }
+}

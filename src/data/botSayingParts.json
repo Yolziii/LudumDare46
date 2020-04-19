@@ -1,0 +1,52 @@
+{
+    "hello": [
+        "Hi",
+        "Yo",
+        "Greeding"
+    ],
+    "intro": [
+        "Okay",
+        "Hm",
+        "OK"
+    ],
+    "happy": [
+        "Yes",
+        "Great",
+        "Good",
+        "Amaizing",
+        "Wonderful"
+    ],
+    "warning": [
+        "Wow",
+        "Wow, wow",
+        "Hey",
+        "Hey, hey",
+        "Emm"
+    ],
+    "sad": [
+        "Oh, no",
+        "Damn",
+        "Fuck",
+        "Shit"
+    ],
+    "back": [
+        "Lets try again",
+        "Again",
+        "One more time"
+    ],
+    "confirm": [
+        "Are you sure",
+        "U sure",
+        "Really"
+    ],
+    "approve": [
+        "Yes, true",
+        "Right",
+        "Exactly"
+    ],
+    "negate": [
+        "Not really",
+        "Wrong",
+        "Guessed wrong!"
+    ]
+}

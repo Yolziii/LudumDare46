@@ -42,6 +42,9 @@ class Terminal extends Component {
                 tabIndex={0} 
                 onKeyDown={this.controller.onKey}
                 onPaste={this.controller.onPaste}
+                onFocus={this.controller.onFocusIn}
+                onBlur={this.controller.onFocusOut}
+                
                 ref={this.myRef}>
                 <Cursor store={this.store}
                 />

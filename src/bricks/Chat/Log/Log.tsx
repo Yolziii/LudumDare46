@@ -1,19 +1,45 @@
 import React, { Component } from 'react';
 import './Log.scss';
-import { ChatUser, ChatMessage } from '../ChatStore';
+import { ChatStore, ChatUser, ChatMessage } from '../ChatStore';
+import { observer } from 'mobx-react';
+import Message from '../Message/Message';
+import { ChatController } from '../ChatController';
 
 interface ILogProps {
-    owner: ChatUser,
-    messages: ChatMessage[]
+    store: ChatStore,
+    controller: ChatController
 }
 
-class Log extends Component {
-    render() {
-        return (
-            <div className="Log">
-                {
+@observer
+class Log extends Component<ILogProps> {
+    private logRef: any;
+    private lastMessage: ChatMessage | null = null;
 
-                }
+    constructor(props: ILogProps) {
+        super(props);
+
+        this.logRef = React.createRef();
+    }
+
+    componentDidMount() {
+        this.props.controller.setLogRef(this.logRef.current)
+    }
+
+    render() {
+        this.lastMessage = null;
+        return (
+            <div className="Log" ref={this.logRef}>
+                {this.props.store.messages.map((message, index) => {
+                    const showOwner = this.lastMessage ? this.lastMessage.ower !== message.ower : true;
+                    this.lastMessage = message;
+                    return (
+                        <Message 
+                            showOwner={showOwner}
+                            player={this.props.store.player} 
+                            key={index} 
+                            message={message} />
+                    );
+                })}
             </div>
         );
     }

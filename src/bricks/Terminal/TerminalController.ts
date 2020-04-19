@@ -1,13 +1,7 @@
 import { TerminalStore, CommandString } from "./TernimalStore";
 import { KeyboardEvent } from "react";
 import { Commander } from "./Commander";
-
-enum KeyCode {
-    BackSpace = 8,
-    Enter = 13,
-    Up = 38,
-    Down = 40,
-}
+import { KeyCode } from "../../utils/KeyCode";
 
 export class TerminalController {
     private commander: Commander;
@@ -17,7 +11,17 @@ export class TerminalController {
 
         this.onKey = this.onKey.bind(this);
         this.onPaste = this.onPaste.bind(this);
+        this.onFocusIn = this.onFocusIn.bind(this);
+        this.onFocusOut = this.onFocusOut.bind(this);
         this.blinkCursor();
+    }
+
+    public onFocusIn() {
+        this.store.focused = true;
+    }
+
+    public onFocusOut() {
+        this.store.focused = false;
     }
 
     public onPaste(event: any) {
@@ -61,6 +65,7 @@ export class TerminalController {
     private blinkCursor(): void {
         setTimeout(() => {
             this.store.cursorVisible = !this.store.cursorVisible;
+            if (!this.store.focused) this.store.cursorVisible = false;
             this.blinkCursor();
         }, 500);
     }

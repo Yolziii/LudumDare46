@@ -1,5 +1,6 @@
 import commandList from './commands.json';
 import { TerminalStore, SimpleString, CommandString } from './TernimalStore';
+import { AudioManager } from '../../utils/AudioManager';
 
 interface ICommandDescription {
     description: string;
@@ -12,7 +13,6 @@ interface ICommandList {
 export class Commander {
 
     public constructor(private store: TerminalStore) {
-        
     }
 
     commands: string[] = [];
@@ -31,6 +31,7 @@ export class Commander {
         }
 
         if (!commands[cmd]) {          
+            AudioManager.play(AudioManager.errorAudio);
             this.store.addString(new SimpleString("ERROR! Unknown command!", 'commandError'));
             this.store.addString(new CommandString(this.store.user));
             return 

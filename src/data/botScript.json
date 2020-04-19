@@ -1,0 +1,41 @@
+{
+    "intro": {
+        "phrases": [
+            "hello", 
+            ["Are you ther?", "You already in?", "U there?", "Are you... alive?"]
+        ]
+    },
+    "doNotIgnoreMe": [
+        "Don't ignore me, please",
+        "I'm awating your answer",
+        "Still awaiting for you"
+    ],
+    "rightAnswer": {
+        "variants": [
+            "This is it",
+            "Well done",
+            "Great job",
+            "Correct",
+            "Absolutely correct"
+        ]
+    },
+    "win": {
+        "phrases": [
+            {"duration": 3000, "typing": true},
+            {"duration": 1000, "pause": true},
+            {"text": "intro", "duration": 500},
+            {"text": "Let me check...", "duration": 2000},
+            {"duration": 4000, "pause": true},
+            "Congratulations! It is in save now ))",
+            {"duration": 1000, "pause": true},
+            "We are done here :)",
+            {"duration": 2000, "pause": true},
+            {"text": "Unbelievable! It is still alive! We did everything right, be proud of yourself!", "duration": 2000},
+            {"duration": 3000, "pause": true},
+            "I must to live now...",
+            {"text": "Keep yourself alive ) Buy!", "duration": 3000}
+            
+        ],
+        "duration": 1000
+    }
+}
