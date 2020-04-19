@@ -1,14 +1,12 @@
 {
-    "content": [
-        "DATE: -10d",
-        "LABRATORY: #labname",
-        "",
-        "REPORT ABSTRACT:",
-        "The object is placed in the experimental chamber. The condition is stable.",
-        "",
-        "REPORT CONTENT: [access denied]"
-       
-    ] 
-
+    "content": [        
+"DATE: -3d",
+"LABRATORY: #labname",
+"",
+"REPORT ABSTRACT:",
+"The object start to mutate.",
+"",
+"REPORT CONTENT: [access denied]"
+]
 }
-   
+

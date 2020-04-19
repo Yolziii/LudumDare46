@@ -4,12 +4,12 @@
         "Yo",
         "Greeding"
     ],
-    "intro": [
+    "intro":[
         "Okay",
         "Hm",
         "OK"
     ],
-    "happy": [
+    "happy":[
         "Yes",
         "Great",
         "Good",
@@ -17,14 +17,14 @@
         "Wonderful",
         "Cool!"
     ],
-    "warning": [
+    "warning":[
         "Wow",
         "Wow, wow",
         "Hey",
         "Hey, hey",
         "Emm"
     ],
-    "sad": [
+    "sad":[
         "Oh, no",
         "Damn",
         "Fuck",
@@ -35,18 +35,18 @@
         "Again",
         "One more time"
     ],
-    "confirm": [
+    "confirm":[
         "Are you sure",
         "U sure",
         "Really"
     ],
-    "approve": [
+    "approve":[
         "Yes, true",
         "Right",
         "Exactly",
         "Great job!"
     ],
-    "negate": [
+    "negate":[
         "Not really",
         "Wrong",
         "Guessed wrong!",
@@ -58,6 +58,7 @@
     "hurrying":[
         "FASTER!!!",
         "Hurry up!",
-        "Time rans out!"
+        "Time rans out!",
+        "Remember! We need to hurry up to keep him alive!"
     ]
 }

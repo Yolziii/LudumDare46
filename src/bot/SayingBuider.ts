@@ -13,7 +13,8 @@ export enum SayPart {
     Back = 'back',
     Confirm = 'confirm',
     Approve = 'approve',
-    Negation = 'negate'
+    Negation = 'negate',
+    Hurrying = 'hurrying',
 }
 
 enum SentenceKind { Part, One, Many }

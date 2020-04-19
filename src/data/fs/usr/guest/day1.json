@@ -1,12 +1,14 @@
 {
-  "content": [
-"DATE: -10d(03.04.20)",
-"LABRATORY: #labname",
-"",
-"REPORT ABSTRACT:",
-"Rules of conduct in the laboratory",
-"",
-"REPORT CONTENT: [access denied]"
+    "content": [
+        "DATE: -4d",
+        "LABRATORY: #labname",
+        "",
+        "REPORT ABSTRACT:",
+        "The object is placed in the experimental chamber. The condition is stable.",
+        "",
+        "REPORT CONTENT: [access denied]"
+       
+    ] 
 
-]
 }
+   

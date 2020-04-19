@@ -1,31 +1,43 @@
-{
-"Mission1": {
-    "phrases": [
-        {"duration": 1000, "typing": true}, 
-        {"duration": 1000, "pause": true},
-        {"text": "Find the list of researches", "duration": 500},
-        {"text": "They do experiments. It’s illegal", "duration": 500},
-        {"text": "We need to keep it alive", "duration": 500},
-        {"duration": 4000, "pause": true},
-        {"text": "Did you find? Open it.", "duration": 2000},
-        {"duration": 1000, "typing": true}, 
-        {"duration": 1000, "pause": true}, 
-        {"duration": 1000, "pause": true},
-        {"duration": 1000, "pause": false },
-        {"text": "hurrying", "duration": 500},
-        {"text": "See a lot of files???", "duration": 500},
-        {"duration": 1000, "typing": true},
-        {"text":"We need the last report", "duration": 500 },
-        {"text":"Find laboratory num in last report", "duration": 500},
-        {"duration":1000, "typing":true},
-        {"text":"Remember! We need to hurry up to keep him alive!", "duration":500},
-        {"text":"Give me this number, I can hack the lock", "duration":500},
-        {"duration":1000,"typing":true},
-        {"text":"One second… YES!! TNX. We won a little time for it!", "duration":500},
-        {"text":"We get access to secret info!", "duration":500},
-        {"text":"Will you go ahead?", "duration":500},
-        {"duration":1000, "typing":true}
-     ],
-    "duration": 1000
+{ 
+    "lisOfResearches":[
+    {"typing": true}, 
+    { "pause": true,"duration": 1000},
+    {"text": "Find the list of researches", "duration": 1000}
+],
+
+"illigalExp":{
+    "phrases":[
+    {"text": "They do experiments. It’s illegal", "duration": 1000},
+    {"typing": true, "duration": 2000}
+    ],
+"openFiles":[
+    {"text":"Did you find? Open it."},
+    {"text":"See a lot of files???"},
+    {"typing": true, "duration": 1000}
+],
+ 
+"labNum":[
+    {"text":"Find laboratory num in last report", "duration": 1000},
+    {"typing": true, "duration": 1000},
+    {"text":"Give me this number, I can hack the lock", "duration":500},
+    {"typing":true, "duration":1000}
+],
+
+"accessToSecretInfo": [
+    {"text":"One second…"},
+    {"text":"YES!! TNX. We won a little time for it!", "duration":1000},
+    {"text":"We get access to secret info!", "duration":1000},
+    {"text":"Will you go ahead?", "duration":1000}
+]
+
 }
 }
+
+       
+    
+    
+            
+        
+           
+            
+            
