@@ -14,7 +14,8 @@
         "Great",
         "Good",
         "Amaizing",
-        "Wonderful"
+        "Wonderful",
+        "Cool!"
     ],
     "warning": [
         "Wow",
@@ -42,11 +43,21 @@
     "approve": [
         "Yes, true",
         "Right",
-        "Exactly"
+        "Exactly",
+        "Great job!"
     ],
     "negate": [
         "Not really",
         "Wrong",
-        "Guessed wrong!"
+        "Guessed wrong!",
+        "Keep looking!",
+        "Try again!",
+        "Last chance!",
+        "ERROR!!"
+    ],
+    "hurrying":[
+        "FASTER!!!",
+        "Hurry up!",
+        "Time rans out!"
     ]
 }
