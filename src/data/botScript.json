@@ -100,18 +100,21 @@
             {"duration": 1000, "pause": true},
             {"chat": "1"},
             {"duration": 2000, "pause": true},
-            {"text": "OHH! NOWW!! ", "duration": 500},
+            {"text": "OHH! NOOOOO!! ", "duration": 500},
             {"text": "WHAT HAVE YOU DONE!!!!", "duration": 2000},
             {"duration": 4000, "pause": true},
             {"text": "Unbelievable! You killed me... Why?? What for?", "duration": 2000},
             {"shell": "login qubick &#AS%AC&sa$sa&qe"},
             {"shell": "cat lose"},
             {"text": "So...", "duration": 3000},
+            {"duration": 2000, "pause": true},
             {"text": "you...", "duration": 3000},
+            {"duration": 2000, "pause": true},
             {"text": "smarter..", "duration": 3000},
+            {"duration": 2000, "pause": true},
             {"text": "th", "duration": 3000},
-            {"duration": 3000, "pause": true},
-            {"chat": 0}
+            {"duration": 10000, "pause": true},
+            {"chat": "0"}
         ],
         "duration": 1000
     }
