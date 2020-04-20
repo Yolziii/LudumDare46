@@ -15,7 +15,7 @@ export class CommandCat extends Command {
         this.logFile = this.logFile.bind(this);
     }
 
-    public run(cmd: string) {
+    public run(cmd: string): boolean {
         this.index = -1;
         const file = cmd.substring(4).trim();
         this.params = FileSystem.fullPath( file );
@@ -31,6 +31,8 @@ export class CommandCat extends Command {
         } catch (e) {
             return this.error(`cat: wrong parameter: ${file}`);
         }
+
+        return true;
     }
 
     logFile() {
@@ -45,11 +47,25 @@ export class CommandCat extends Command {
                 return;
             }
 
-            const str =  (this.file as ContentType).content[this.index];
+            let str =  (this.file as ContentType).content[this.index];
+            for (var pattern of ["#1d", "#2d", "#3d", "#4d"]) {
+                if (str.indexOf(pattern) === -1) continue;
+                str = str.replace(pattern, this.gatDate(+pattern.substr(1,1)));
+            }
+
             this.controller.showString(str);
             this.logFile();
         }, 100);
     }
+
+    gatDate(daysBehind: number): string {
+        var day = new Date()
+        day.setDate( day.getDate() - daysBehind);
+        return `${this.getNumber(day.getDate())}/${this.getNumber(day.getMonth())}/${day.getFullYear()}`;
+
+    }
+
+    getNumber = (number: number): string => number > 10 ? number.toString() : '0' + number;
 
     usage(): string {
         return 'cat [FILE]         - show file content';

@@ -1,4 +1,3 @@
-import commandList from './commands.json';
 import { TerminalStore, SimpleString, CommandString } from './TernimalStore';
 import { AudioManager } from '../../utils/AudioManager';
 import { CommandCat } from './commands/CommandCat';
@@ -8,43 +7,44 @@ import { CommandCd } from './commands/CommandCd';
 import { CommandHelp } from './commands/CommandHelp';
 import { CommandLogin } from './commands/CommandLogin';
 import { Command } from './commands/Command';
-
-interface ICommandDescription {
-    description: string;
-}
-
-interface ICommandList {
-    [key: string]: ICommandDescription;
-}
+import { CommandUsers } from './commands/CommandUsers';
 
 export interface ICmdist {
     [key: string]: Command;
 }
 
-export class Commander {
-    cmds: ICmdist;
+class CommandsImpl {
+    private cmds: ICmdist | null = null;
 
-    commands: string[] = [];
-    commandIndex = -1;
+    get commands(): ICmdist {return this.cmds as ICmdist}
 
-    public constructor(private store: TerminalStore, private controller: TerminalController) {
+    initCommands(controller: TerminalController) {
         this.cmds = {
             'cat' : new CommandCat(controller),
             'help' : new CommandHelp(controller),
             'ls' : new CommandLs(controller),
             'cd' : new CommandCd(controller),
             'login' : new CommandLogin(controller),
+            'users' : new CommandUsers(controller),
         };
+    }
+}
 
-        (this.cmds['help'] as CommandHelp).initCommands(this.cmds);
+export const Commands = new CommandsImpl();
+
+export class Commander {
+    commands: string[] = [];
+    commandIndex = -1;
+
+    public constructor(private store: TerminalStore, private controller: TerminalController) {
+        Commands.initCommands(controller);
     }
     
-    run(cmd: string) {
-        const commands = commandList as ICommandList;
+    run(cmd: string): boolean {
         cmd = cmd.trim();
         if (cmd === '') {
             this.store.addString(new CommandString());
-            return;
+            return false;
         }
 
         if (this.commands[this.commandIndex-1] !== cmd) {
@@ -53,20 +53,18 @@ export class Commander {
     
         }
 
-        for (let [key, command] of Object.entries(this.cmds)) {
+        for (let [key, command] of Object.entries(Commands.commands)) {
             if (cmd.substr(0, key.length) === key) {
                 this.store.locked = true;
-                command.run(cmd);
-                return;
+                return command.run(cmd);
             }
         }
+      
+        AudioManager.play(AudioManager.errorAudio);
+        this.store.addString(new SimpleString("unknown command", 'commandError'));
+        this.store.addString(new CommandString());
 
-        if (!commands[cmd]) {          
-            AudioManager.play(AudioManager.errorAudio);
-            this.store.addString(new SimpleString("unknown command", 'commandError'));
-            this.store.addString(new CommandString());
-            return 
-        }
+        return false;
     }
 
     nextCommand(): string {

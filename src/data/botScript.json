@@ -1,5 +1,5 @@
 {
-    "intro": {
+    "chatTutorial-intro": {
         "phrases": [
             {"shell": "cat welcome"},
             {"duration": 500, "pause": true},
@@ -7,7 +7,7 @@
             "hello"
         ]
     },
-    "chatTutorial": {
+    "chatTutorial-tutorial": {
         "variants": [
             [
                 "Are you there?", 
@@ -26,13 +26,63 @@
         ],
         "duration": 150
     },
-    "endChatTutorial": {
+    "chatTutorial-end": {
         "phrases": [
             "Ah, you there! Thanks Good!!!",
             "Listen",
             {"text": "They do experiments. It’s illegal!!", "duration": 4000},
             {"text": "If we don't stop them, they kill the creature", "duration": 5000},
             "We need to hurry up!"
+        ]
+    },
+
+    "terminalTutorial-intro": {
+        "phrases": [
+            "Insider will help us"
+        ]
+    },
+
+    "terminalTutorial-helpCmd": {
+        "phrases": [
+            "Use help command"
+        ]
+    },
+
+    "terminalTutorial-lsCmd": {
+        "phrases": [
+            "Use ls command"
+        ]
+    },
+
+    "terminalTutorial-cdCmd": {
+        "phrases": [
+            "Use cd command"
+        ]
+    },
+
+    "terminalTutorial-catCmd": {
+        "phrases": [
+            "Use cat command"
+        ]
+    },
+
+    "terminalTutorial-loginCmd": {
+        "phrases": [
+            "Use cat command"
+        ]
+    },
+
+    "terminalTutorial-end": {
+        "phrases": [
+            "yes, we are lab20 user now!"
+        ]
+    },
+
+    "terminalTutorial-usePassword": {
+        "phrases": [
+            "What this?",
+            "Let me check",
+            "Oh, it WAS password, got it! Sorry ))"
         ]
     },
 

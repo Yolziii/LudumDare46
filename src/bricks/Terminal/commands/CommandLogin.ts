@@ -6,7 +6,7 @@ type ContentType = {content: string[]};
 
 export class CommandLogin extends Command {
 
-    public run(cmd: string) {
+    public run(cmd: string): boolean {
         let [, newUser, newPwd] = cmd.split(' ');
 
         if (!newUser) {
@@ -45,6 +45,7 @@ export class CommandLogin extends Command {
         }
 
         this.controller.backControl();
+        return true;
     }
 
     usage(): string {

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { Component, MouseEvent } from 'react';
 import './LoginBtn.scss'
 import { FileSystem } from '../../Terminal/FileSystem';
@@ -22,7 +23,11 @@ class LoginBtn extends Component<ILoginBtnProps> {
     }
     render() {
         return (
+            
             <div className="LoginBtn">
+                 <img 
+                    className="LoginBtn-logo"
+                    src={process.env.PUBLIC_URL + '/img/logo.png'}  />
                  <div className="LoginBtn-button" onClick={this.onClick}>
                     Login as guest
                  </div>

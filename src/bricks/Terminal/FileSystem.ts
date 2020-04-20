@@ -1,6 +1,7 @@
 import fs from "../../data/fs.json";
 import { observable } from "mobx";
 
+// TODO: Autobuild files structure
 var root = ((fs as any) as IFsItem);
 root.root = true;
 root.path = '';
@@ -62,10 +63,12 @@ class FileSystemImpl {
                     if (isFile) return null;
                 }
                 else {
-                    if (dir.files[file].path === filePath &&  dir.files[file].user !== this.currentUser) {
+                    if (dir.files[file].path === filePath && 
+                        dir.files[file].user !== this.currentUser && 
+                        this.currentUser !== 'root') {
                         //console.log(`[false]: wrong user: ${this.currentUser} != ${dir.files[file].user}`);
                         // TODO: 
-                        //return null;
+                        return null;
                     }
                     if (!isFile && !dir.files[file].files) continue;
                     dir = dir.files[file];
@@ -79,7 +82,7 @@ class FileSystemImpl {
         const dir = this.findDir(filePath, false);
         if (dir) {
             if (this.currentDir === dir) return ['unknown directory'];
-            if (dir.user !== this.currentUser) return ['access denided'];
+            if (dir.user !== this.currentUser && this.currentUser !== 'root') return ['access denided'];
             this.currentDir = dir;
             return this.currentDir.path ? this.currentDir.path : '/';
         }

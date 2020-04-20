@@ -7,6 +7,18 @@
 
     background: linear-gradient(#6989ff, #2f4491);
 
+    &-logo {
+        position: absolute;
+        bottom: 2px;
+        right: 20px;
+
+        width: 256px;
+        height: 179px;
+
+        margin: 10px 10px;
+        opacity: 0.2;
+    }
+
     &-terminalPosition {
         position: relative;
 

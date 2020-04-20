@@ -3,6 +3,7 @@ import { ChatController } from "../bricks/Chat/ChatController";
 import { IPlayerAction } from "../player/PlayerMind";
 import { Sentense } from "./SayingBuider";
 import { TerminalController } from "../bricks/Terminal/TerminalController";
+import { BotGoal } from "./goals/BotGoal";
 
 export enum BotActionType {
     Typing, 
@@ -21,15 +22,6 @@ export type Task = {
     duration: number
 }
 
-export interface IBotGoal {
-    abort: boolean;
-    itFinished: boolean;
-    tasks: Task[];
-    nextGoal: IBotGoal | null;
-
-    onPlayerAction(action: IPlayerAction): void;
-}
-
 export class BotMind {
     taskIndex = -1;
     tasks: Task[] = [];
@@ -38,7 +30,7 @@ export class BotMind {
         private model: BotModel, 
         private chat: ChatController, 
         private terminal: TerminalController, 
-        private goal: IBotGoal) 
+        private goal: BotGoal) 
     {
         this.think = this.think.bind(this);
         this.typeText = this.typeText.bind(this);
@@ -47,6 +39,8 @@ export class BotMind {
 
         chat.initBotMind(this);
         terminal.initBotMind(this);
+
+        goal.initBotMind(this);
     }
 
     playerAction(action: IPlayerAction) {
@@ -57,11 +51,6 @@ export class BotMind {
         this.chat.botTyping(false);
         this.taskIndex++;
         if (this.taskIndex >= this.tasks.length) {
-            this.decideWhatToDo();
-            return;
-        }
-
-        if (this.goal.abort) {
             this.decideWhatToDo();
             return;
         }
@@ -117,6 +106,7 @@ export class BotMind {
     decideWhatToDo() {
         if (this.goal.itFinished && this.goal.nextGoal !== null) {
             this.goal = this.goal.nextGoal;
+            this.goal.initBotMind(this);
         }
         this.tasks = this.goal.tasks;
         this.taskIndex = -1;

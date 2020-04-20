@@ -36,7 +36,7 @@ export class CommandString implements ITerminalString {
     @computed get length() { return stripHtml(this.value).length }
 
     public constructor(content: string = '') {
-        this.welcome = `<span class="notSelectable"><span class="userName">@${FileSystem.currentUser}</span>: ></span>`;
+        this.welcome = `<span class="notSelectable"><span class="userName">@${FileSystem.currentUser}</span>: ${FileSystem.currentDir.path}></span>`;
         this.content = content;
     }
 

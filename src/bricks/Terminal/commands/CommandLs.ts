@@ -4,7 +4,7 @@ import { AudioManager } from "../../../utils/AudioManager";
 
 export class CommandLs extends Command {
     
-    public run(cmd: string) {
+    public run(cmd: string): boolean {
 
         const files = this.getDirFiles(FileSystem.currentDir);
         if (!files) {
@@ -19,6 +19,7 @@ export class CommandLs extends Command {
         }
 
         this.controller.backControl();
+        return true;
     
     }
 

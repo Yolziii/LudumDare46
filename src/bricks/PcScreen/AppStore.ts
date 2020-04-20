@@ -4,8 +4,7 @@ import { ChatStore } from "../Chat/ChatStore";
 import { ChatController } from "../Chat/ChatController";
 import { BotModel } from "../../bot/BotModel";
 import { BotMind } from "../../bot/BotMind";
-import { WinGoal } from "../../bot/goals/WinGoal";
-import { IntroGoal } from "../../bot/goals/IntroGoal";
+import { TerminalTutorialGoal } from "../../bot/goals/TerminalTutorialGoal";
 
 class AppStoreImpl {
     public terminalStore: TerminalStore;
@@ -29,7 +28,7 @@ class AppStoreImpl {
             this.botModel, 
             this.chatController, 
             this.terminalController, 
-            new IntroGoal());
+            new TerminalTutorialGoal());
     }
 }
 

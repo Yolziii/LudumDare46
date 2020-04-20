@@ -1,8 +1,8 @@
-import { IBotGoal, Task } from "../BotMind";
+import { Task } from "../BotMind";
 import { IPlayerAction } from "../../player/PlayerMind";
 import { BotGoal } from "./BotGoal";
 
-export class WinGoal extends BotGoal implements IBotGoal {
+export class EndGameGoal extends BotGoal {
     abort: boolean = false;
     itFinished: boolean = false;
 
@@ -15,7 +15,7 @@ export class WinGoal extends BotGoal implements IBotGoal {
         }
         return this.waitingTasks();
     }
-    nextGoal: IBotGoal | null = null;
+    get nextGoal(): BotGoal | null {return null}
 
     public onPlayerAction(action: IPlayerAction): void {
     }

@@ -1,17 +1,11 @@
 import { Command } from "./Command";
 import { AudioManager } from "../../../utils/AudioManager";
-import { ICmdist } from "../Commander";
+import { ICmdist, Commands } from "../Commander";
 
 export class CommandHelp extends Command {
-    usage(): string {
-        return "help               - show allowed commands";
-    }
-
-    commands: ICmdist | null = null;
-
-    public run(cmd: string) {
+    public run(cmd: string): boolean {
         AudioManager.play(AudioManager.ok);
-        for (let [, cmd] of Object.entries(this.commands as ICmdist)) {
+        for (let [, cmd] of Object.entries(Commands.commands as ICmdist)) {
             this.controller.showString(`    ${cmd.usage()}`);        
         };
         
@@ -19,9 +13,10 @@ export class CommandHelp extends Command {
         // TODO: Commands for current user
 
         this.controller.backControl();
+        return true;
     }
 
-    public initCommands(commands: ICmdist) {
-        this.commands = commands;
+    usage(): string {
+        return "help               - show allowed commands";
     }
 }

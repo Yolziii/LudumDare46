@@ -7,26 +7,14 @@
                 "guest": {
                     "user": "guest",
                     "files": {
-                        "reports": {
-                            "user": "guest",
-                            "files": {
-                                "day1": {
-                                    "user": "guest"
-                                },
-                                "day2": {
-                                    "user": "guest"
-                                },
-                                "day3": {
-                                    "user": "guest"
-                                },
-                                "day4": {
-                                    "user": "guest"
-                                },
-                                "day5": {
-                                    "user": "guest"
-                                }
-                            }
-                        },
+                        "day1": {"user": "guest"},
+                        "day1a": {"user": "guest"},
+                        "day2": {"user": "guest"},
+                        "day2a": {"user": "guest"},
+                        "day3": {"user": "guest"},
+                        "day3a": {"user": "guest"},
+                        "day4": {"user": "guest"},
+                        "day4a": {"user": "guest"},
                         "welcome": {
                             "user": "guest"
                         }

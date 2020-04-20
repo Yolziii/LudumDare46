@@ -57,9 +57,9 @@ export class TerminalController {
                 break;
 
             case KeyCode.Enter: 
-                this.commander.run(str.content);
+                const success = this.commander.run(str.content);
                 this.botMind?.playerAction(
-                    new PlayerTerminalCommandAction(str.content)
+                    new PlayerTerminalCommandAction(str.content, success)
                 );
                 break;
 

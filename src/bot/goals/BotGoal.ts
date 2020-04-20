@@ -1,4 +1,4 @@
-import { Task, BotAction, BotActionType } from "../BotMind";
+import { Task, BotAction, BotActionType, BotMind } from "../BotMind";
 import { ScriptLine } from "../SayingBuider";
 import { IPlayerAction, PlayerChatMessageAction, PlayerTerminalCommandAction } from "../../player/PlayerMind";
 
@@ -22,7 +22,19 @@ class ScriptIndexesImpl {
 
 export const ScriptIndexes = new ScriptIndexesImpl();
 
-export class BotGoal {
+export abstract class BotGoal {
+    botMind: BotMind | null = null;
+
+    initBotMind(botMind: BotMind) {
+        this.botMind = botMind;
+    }
+
+    itFinished = false;
+
+    abstract onPlayerAction(action: IPlayerAction): void;
+    abstract get tasks(): Task[];
+    abstract get nextGoal(): BotGoal | null;
+
     fillTasks(id: string): Task[] {
        
         const line = new ScriptLine(id);

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { Component } from 'react';
 import './PcScreen.scss';
 import Terminal from '../Terminal/Terminal';
@@ -33,6 +34,10 @@ class PcScreen extends Component {
 
         return (
             <div className="PcScreen">
+                <img 
+                    className="PcScreen-logo"
+                    src={process.env.PUBLIC_URL + '/img/logo.png'}  />
+                    
                 <Window 
                     className="PcScreen-terminalPosition" 
                     title="Terminal"
