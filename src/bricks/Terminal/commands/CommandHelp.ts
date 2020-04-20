@@ -6,6 +6,7 @@ import { FileSystem } from "../FileSystem";
 export class CommandHelp extends Command {
     public run(cmd: string): boolean {
         AudioManager.play(AudioManager.ok);
+        this.controller.showString(`Available commands:`);       
         for (let [key, cmd] of Object.entries(Commands.commands as ICmdist)) {
             if (key === 'poison' && FileSystem.currentUser !== 'root') continue;
             if (key === 'unlock' && FileSystem.currentUser === 'guest') continue;

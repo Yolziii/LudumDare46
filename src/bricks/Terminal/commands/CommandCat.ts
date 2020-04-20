@@ -41,6 +41,9 @@ export class CommandCat extends Command {
                 AudioManager.play(AudioManager.guideWin);
             }
             
+            if (!(this.file as ContentType).content) {
+                return this.error(`cat: wrong file name`);
+            }
             this.index++;
             if (this.index >= (this.file as ContentType).content.length) {
                 this.controller.backControl();
@@ -62,12 +65,11 @@ export class CommandCat extends Command {
         var day = new Date()
         day.setDate( day.getDate() - daysBehind);
         return `${this.getNumber(day.getDate())}/${this.getNumber(day.getMonth())}/${day.getFullYear()}`;
-
     }
 
     getNumber = (number: number): string => number > 10 ? number.toString() : '0' + number;
 
     usage(): string {
-        return 'cat [FILE]         - show file content';
+        return 'cat FILE_NAME      - show file content';
     }
 }

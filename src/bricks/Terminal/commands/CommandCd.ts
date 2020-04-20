@@ -26,6 +26,6 @@ export class CommandCd extends Command {
     }
 
     usage(): string {
-        return 'cd [DIRECTORY]     - move to directory (use ../ to move to parent directory)';
+        return 'cd DIRECTORY_NAME  - move to directory (use ../ to move to parent directory)';
     }
 }

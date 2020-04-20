@@ -49,6 +49,6 @@ export class CommandLogin extends Command {
     }
 
     usage(): string {
-        return 'login [USER] [PWD] - log in by another user';
+        return 'login USER PSWD    - log in by another user';
     }
 }

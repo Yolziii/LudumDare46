@@ -16,11 +16,13 @@ export class CommandUsers extends Command {
             const [user,] = line.split(' ');
             
             this.controller.showString(`    ${user}`);
-        }     
+        }    
+        
+        this.controller.backControl();
         return true;   
     }
 
     usage(): string {
-        return 'users               - list of registered users';
+        return 'users              - list of registered users';
     }
 }
