@@ -1,16 +1,17 @@
 import { TerminalController } from "../TerminalController";
 import { AudioManager } from "../../../utils/AudioManager";
 import { FileSystem } from "../FileSystem";
-import {ICommand} from "../Commander";
+import { Command } from "./Command";
 
 type ContentType = {content: string[]};
 
-export class CommandCat implements ICommand {
+export class CommandCat extends Command {
     file: ContentType | null = null;
     index = -1;
     params: string = '';
 
     public constructor(public controller: TerminalController ) {
+        super(controller);
         this.logFile = this.logFile.bind(this);
     }
 
@@ -20,18 +21,15 @@ export class CommandCat implements ICommand {
         this.params = FileSystem.fullPath( file );
 
         if (!FileSystem.allowAccess(this.params, true)) {
-            this.controller.showString(`Access denided!`);
-            this.controller.backControl();
-            return;
+            return this.error('cat: unknown error');
         }
 
         try {
+            AudioManager.play(AudioManager.ok);
             this.file = require(`../../../data/fs${this.params}`);
             this.logFile();
         } catch (e) {
-            this.controller.showString(`cat: wrong parameter: ${file}`);
-            this.controller.backControl();
-            return;
+            return this.error(`cat: wrong parameter: ${file}`);
         }
     }
 
@@ -53,4 +51,7 @@ export class CommandCat implements ICommand {
         }, 100);
     }
 
+    usage(): string {
+        return 'cat [FILE]         - show file content';
+    }
 }

@@ -7,6 +7,7 @@ import { CommandLs } from './commands/CommandLs';
 import { CommandCd } from './commands/CommandCd';
 import { CommandHelp } from './commands/CommandHelp';
 import { CommandLogin } from './commands/CommandLogin';
+import { Command } from './commands/Command';
 
 interface ICommandDescription {
     description: string;
@@ -16,12 +17,12 @@ interface ICommandList {
     [key: string]: ICommandDescription;
 }
 
-export interface ICommand {
-    run(cmd: string): void;
+export interface ICmdist {
+    [key: string]: Command;
 }
 
 export class Commander {
-    cmds: {[key: string]: ICommand}
+    cmds: ICmdist;
 
     commands: string[] = [];
     commandIndex = -1;
@@ -33,7 +34,9 @@ export class Commander {
             'ls' : new CommandLs(controller),
             'cd' : new CommandCd(controller),
             'login' : new CommandLogin(controller),
-        }
+        };
+
+        (this.cmds['help'] as CommandHelp).initCommands(this.cmds);
     }
     
     run(cmd: string) {
@@ -47,6 +50,7 @@ export class Commander {
         if (this.commands[this.commandIndex-1] !== cmd) {
             this.commands.push(cmd);
             this.commandIndex = this.commands.length;
+    
         }
 
         for (let [key, command] of Object.entries(this.cmds)) {
@@ -59,7 +63,7 @@ export class Commander {
 
         if (!commands[cmd]) {          
             AudioManager.play(AudioManager.errorAudio);
-            this.store.addString(new SimpleString("ERROR! Unknown command!", 'commandError'));
+            this.store.addString(new SimpleString("unknown command", 'commandError'));
             this.store.addString(new CommandString());
             return 
         }

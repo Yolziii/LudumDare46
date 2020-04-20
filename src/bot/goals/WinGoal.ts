@@ -1,8 +1,8 @@
-import { IBotGoal, Task, BotActionType, BotAction } from "../BotMind";
+import { IBotGoal, Task } from "../BotMind";
 import { IPlayerAction } from "../../player/PlayerMind";
-import { ScriptLine } from "../SayingBuider";
+import { BotGoal } from "./BotGoal";
 
-export class WinGoal implements IBotGoal {
+export class WinGoal extends BotGoal implements IBotGoal {
     abort: boolean = false;
     itFinished: boolean = false;
 
@@ -11,25 +11,12 @@ export class WinGoal implements IBotGoal {
     get tasks(): Task[] {
         this.totalRequests++;
         if (this.totalRequests === 1) {
-            const line = new ScriptLine('win');
-            const tasks: Task[] = [];
-            while(!line.done) {
-                const sentense = line.next();
-                tasks.push({
-                    action: new BotAction(sentense.actionType, sentense),
-                    duration: sentense.duration
-                })
-            }
-
-            return tasks;
+            return this.fillTasks('win');
         }
-        return [
-            {action: new BotAction(BotActionType.WaitForPlayer), duration: 2000}
-        ]
+        return this.waitingTasks();
     }
     nextGoal: IBotGoal | null = null;
 
     public onPlayerAction(action: IPlayerAction): void {
-
     }
 }

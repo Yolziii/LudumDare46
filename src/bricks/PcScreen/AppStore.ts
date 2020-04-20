@@ -5,6 +5,7 @@ import { ChatController } from "../Chat/ChatController";
 import { BotModel } from "../../bot/BotModel";
 import { BotMind } from "../../bot/BotMind";
 import { WinGoal } from "../../bot/goals/WinGoal";
+import { IntroGoal } from "../../bot/goals/IntroGoal";
 
 class AppStoreImpl {
     public terminalStore: TerminalStore;
@@ -24,7 +25,11 @@ class AppStoreImpl {
         this.chatController = new ChatController(this.chatStore);
 
         this.botModel = new BotModel();
-        this.botMind = new BotMind(this.botModel, this.chatController, this.terminalController, new WinGoal());
+        this.botMind = new BotMind(
+            this.botModel, 
+            this.chatController, 
+            this.terminalController, 
+            new IntroGoal());
     }
 }
 

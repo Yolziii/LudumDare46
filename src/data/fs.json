@@ -33,15 +33,20 @@
                     }
                 },
                 "qubick": {
-                    "user": "qubiick",
+                    "user": "qubick",
                     "files": {
                         "win": {
-                            "user": "qubiick"
+                            "user": "qubick"
                         }
                     }
                 },
                 "root": {
-                    "user": "root"
+                    "user": "root",
+                    "files": {
+                        "remark": {
+                            "user": "root"
+                        }
+                    }
                 },
                 "lab20": {
                     "user": "lab20"

@@ -1,6 +1,6 @@
 import {observable, computed} from 'mobx';
 import { stripHtml } from '../../utils/utils';
-import data from '../../data/terminal.json';
+
 import { FileSystem } from './FileSystem';
 
 export const TERMINAL_WIDTH = 80;
@@ -61,10 +61,6 @@ export class CommandString implements ITerminalString {
 }
 
 export class TerminalStore {
-    public constructor() {
-        this.addString(new SimpleString(data.welcome.replace('#user', FileSystem.currentUser)))
-        this.addString(new CommandString());
-    }
 
     @observable locked = false;
     @observable offset = 0;

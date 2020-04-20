@@ -2,8 +2,11 @@ import { TerminalStore, CommandString, ITerminalString, SimpleString } from "./T
 import { KeyboardEvent } from "react";
 import { Commander } from "./Commander";
 import { KeyCode } from "../../utils/KeyCode";
+import { BotMind } from "../../bot/BotMind";
+import { PlayerTerminalCommandAction } from "../../player/PlayerMind";
 
 export class TerminalController {
+    private botMind: BotMind | null = null;
     private commander: Commander;
 
     constructor(private store: TerminalStore) {
@@ -14,6 +17,10 @@ export class TerminalController {
         this.onFocusIn = this.onFocusIn.bind(this);
         this.onFocusOut = this.onFocusOut.bind(this);
         this.blinkCursor();
+    }
+
+    public initBotMind(botMind: BotMind) {
+        this.botMind = botMind;
     }
 
     public onFocusIn() {
@@ -51,6 +58,9 @@ export class TerminalController {
 
             case KeyCode.Enter: 
                 this.commander.run(str.content);
+                this.botMind?.playerAction(
+                    new PlayerTerminalCommandAction(str.content)
+                );
                 break;
 
             default:
@@ -72,8 +82,8 @@ export class TerminalController {
         this.commander.run(cmd);
     }
 
-    public showString(str: string) {
-        this.store.addString(new SimpleString(str));
+    public showString(str: string, className: string= '') {
+        this.store.addString(new SimpleString(str, className));
     }
 
     isCommand = (sentense: ITerminalString): sentense is CommandString =>

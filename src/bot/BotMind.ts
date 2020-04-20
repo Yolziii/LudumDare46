@@ -45,7 +45,12 @@ export class BotMind {
         this.waitForPlayer = this.waitForPlayer.bind(this);
         this.decideWhatToDo = this.decideWhatToDo.bind(this);
 
-        this.decideWhatToDo();
+        chat.initBotMind(this);
+        terminal.initBotMind(this);
+    }
+
+    playerAction(action: IPlayerAction) {
+        this.goal.onPlayerAction(action);
     }
 
     think() {

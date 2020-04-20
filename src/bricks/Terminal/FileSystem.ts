@@ -75,13 +75,15 @@ class FileSystemImpl {
         return dir;
     }
 
-    moveTo(filePath: string): string | null {
+    moveTo(filePath: string): string | [string] {
         const dir = this.findDir(filePath, false);
         if (dir) {
+            if (this.currentDir === dir) return ['unknown directory'];
+            if (dir.user !== this.currentUser) return ['access denided'];
             this.currentDir = dir;
             return this.currentDir.path ? this.currentDir.path : '/';
         }
-        return null;
+        return ['unknown directory'];
     }
 
     allowAccess(filePath: string, isFile: boolean): boolean {

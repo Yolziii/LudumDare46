@@ -1,10 +1,14 @@
 import { ChatStore } from "./ChatStore";
 import { KeyCode } from "../../utils/KeyCode";
 import { KeyboardEvent } from "react";
+import { BotMind } from "../../bot/BotMind";
+import { runInThisContext } from "vm";
+import { PlayerChatMessageAction } from "../../player/PlayerMind";
 
 export class ChatController {
     private textRef: HTMLDivElement | null = null;
     private logRef: HTMLDivElement | null = null;
+    private botMind: BotMind | null = null;
 
     constructor(private store: ChatStore) {
         this.onFocusIn = this.onFocusIn.bind(this);
@@ -18,6 +22,10 @@ export class ChatController {
         this.blinkCursor();
 
         store.initController(this);
+    }
+
+    initBotMind(botMind: BotMind) {
+        this.botMind = botMind;
     }
 
     botTyping(isTypeing: boolean) {
@@ -59,6 +67,9 @@ export class ChatController {
             case KeyCode.Enter: 
                 if (this.store.currentText.trim() === '') break;
                 this.store.addMessage(this.store.player, this.store.currentText);
+                this.botMind?.playerAction(
+                    new PlayerChatMessageAction(this.store.currentText)
+                );
                 this.store.currentText = '';
                 this.checkLogOffset();
                 break;

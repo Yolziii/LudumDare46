@@ -1,11 +1,8 @@
-import { TerminalController } from "../TerminalController";
 import { FileSystem } from "../FileSystem";
-import { ICommand } from "../Commander";
+import { Command } from "./Command";
+import { AudioManager } from "../../../utils/AudioManager";
 
-export class CommandCd implements ICommand {
-    public constructor(public controller: TerminalController) {
-    }
-
+export class CommandCd extends Command {
     public run(cmd: string) {
         let file = cmd.substring(3).trim();
         if (file.substring(file.length-1) === '/') {
@@ -14,17 +11,20 @@ export class CommandCd implements ICommand {
         //let filePath = FileSystem.fullPath( file );
         //filePath = filePath.substring(0, filePath.length-1);
 
-        console.log(`file: ${file}`);
         //console.log(`filePath: ${filePath}`);
 
-
-
-        if (FileSystem.moveTo(file)) {
+        const result = FileSystem.moveTo(file);
+        if (typeof result === 'string') {
+            AudioManager.play(AudioManager.ok);
             this.controller.showString(`Current directory: ${FileSystem.currentDir.path ? FileSystem.currentDir.path : '/'}`);
         } else {
-            this.controller.showString(`cd: wrong parameter ${cmd.substring(3).trim()}`);
+            return this.error(`cd: ${result[0]}`);
         }
 
         this.controller.backControl();
+    }
+
+    usage(): string {
+        return 'cd [DIRECTORY]     - move to directory';
     }
 }

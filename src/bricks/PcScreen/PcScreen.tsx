@@ -21,8 +21,15 @@ class PcScreen extends Component {
     }
 
     render() {
-        if (FileSystem.currentUser === '') 
-            return <div className="PcScreen"><LoginBtn /></div>
+        if (FileSystem.currentUser === '') {
+            return (
+                <div className="PcScreen">
+                    <LoginBtn 
+                        store={AppStore.terminalStore}
+                        botMind={AppStore.botMind} />
+                </div>
+            )
+        }
 
         return (
             <div className="PcScreen">

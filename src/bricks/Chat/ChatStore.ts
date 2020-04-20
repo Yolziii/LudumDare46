@@ -52,7 +52,9 @@ export class ChatStore {
     }
 
     public addMessage(user: ChatUser, text: string, typing: boolean=false) {
-        if (user === this.player) AudioManager.play(AudioManager.playerMessage);
+        if (user === this.player) {
+            AudioManager.play(AudioManager.playerMessage);
+        }
         else AudioManager.play(AudioManager.guideMessage);
         const message = new ChatMessage(user, text, typing);
         this.messages.push(message);

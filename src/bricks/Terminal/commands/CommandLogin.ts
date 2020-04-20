@@ -1,26 +1,20 @@
-import { TerminalController } from "../TerminalController";
-import { ICommand } from "../Commander";
 import { FileSystem } from "../FileSystem";
+import { Command } from "./Command";
+import { AudioManager } from "../../../utils/AudioManager";
 
 type ContentType = {content: string[]};
 
-export class CommandLogin implements ICommand {
-    public constructor(public controller: TerminalController) {
-    }
+export class CommandLogin extends Command {
 
     public run(cmd: string) {
         let [, newUser, newPwd] = cmd.split(' ');
 
         if (!newUser) {
-            this.controller.showString(`login: wrong params`);
-            this.controller.backControl();
-            return;
+            return this.error(`login: wrong params`);
         }
 
         if (newUser === FileSystem.currentUser) {
-            this.controller.showString(`User ${newUser} already loged in!`);
-            this.controller.backControl();
-            return;
+            return this.error(`login: user ${newUser} already loged in!`);
         }
 
         const users: ContentType = require(`../../../data/fs/etc/passwd`);
@@ -30,24 +24,30 @@ export class CommandLogin implements ICommand {
             const [user, pwd] = line.split(' ');
             if (user === newUser) {
                 findUser = true;
-                if (`[${newPwd}]` === pwd) {
+                // eslint-disable-next-line eqeqeq
+                if ((newPwd as any).hashCode() == pwd) {
                     rightPwd = true;
                 }
             }
         }
 
         if (!findUser) {
-            this.controller.showString(`Unknown user ${newUser} `);
+            return this.error(`login: unknown user ${newUser}`);
         } else {
             if (!rightPwd) {
-                this.controller.showString(`Wrong password!`);
+                return this.error(`login: wrong password`);
             }
             else {
+                AudioManager.play(AudioManager.ok);
                 FileSystem.currentUser = newUser;
-                this.controller.runCommand(`cd /usr/${newUser}`);
+                this.controller.runCommand(`cd /usr/${newUser}/`);
             }
         }
 
         this.controller.backControl();
+    }
+
+    usage(): string {
+        return 'login [USER] [PWD] - log in by another user';
     }
 }

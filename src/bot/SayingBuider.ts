@@ -2,6 +2,7 @@ import { BotMood } from "./BotModel";
 import partsData from '../data/botSayingParts.json';
 import scriptData from '../data/botScript.json';
 import { BotActionType } from "./BotMind";
+import { ScriptIndexes } from "./goals/BotGoal";
 
 export enum SayPart {
     None = 'none',
@@ -63,9 +64,10 @@ export class Sentense {
     one: string = ''
     part: SayPart = SayPart.None;
 
-    private choiseIndex = -1;
+    private id: string;
 
-    constructor(public sentense: SentenseType, public duration: number = 500) { 
+    constructor(public sentense: SentenseType, id: string, public duration: number = 2000) { 
+        this.id = id;
         if (Array.isArray(sentense)) {
             this.actionType = BotActionType.SaySomething;
             this.kind = SentenceKind.Many;
@@ -122,13 +124,36 @@ export class Sentense {
     chooseOne() {
         switch (this.kind) {
             case SentenceKind.Many:
-                this.choiseIndex++;
-                if (this.choiseIndex >= this.many.length) {
-                    this.choiseIndex = 0;
+                let choiseIndex = ScriptIndexes.getIndex(this.id);
+                if (choiseIndex >= this.many.length) {
+                    choiseIndex %= this.many.length;
+                    console.log(`this.choiseIndex: ${ choiseIndex}`);
                 }
-                return this.many[this.choiseIndex];
+
+                const line = this.many[choiseIndex];
+                if (Array.isArray(line)) {
+                    let subIndex = ScriptIndexes.getIndex(this.id + choiseIndex);
+                    if (subIndex >= line.length) {
+                        subIndex %= line.length;
+                    }
+                    return line[subIndex];
+                }
+
+                return line;
 
             default:
+                if (Array.isArray(this.one)) {
+                    let choiseIndex = ScriptIndexes.getIndex(this.id);
+                    if (choiseIndex >= this.many.length) {
+                        choiseIndex %= this.many.length;
+                    }
+                    let subIndex = ScriptIndexes.getIndex(this.id + choiseIndex);
+                    if (subIndex >= this.one.length) {
+                        subIndex %= this.one.length;
+                    }
+                    return this.one[subIndex];
+                }
+
                 return this.one;
         }
     }
@@ -143,12 +168,12 @@ export class ScriptLine {
         if (this.isPhrases(line)) {
             this.sentencies = line.phrases.map(sentense => {
                 //if (this.isMergedPhrase(sentense)) {}
-                return new Sentense(sentense, line.duration ? line.duration : undefined)
+                return new Sentense(sentense, id, line.duration ? line.duration : undefined)
             });
         } else if (this.isVariants(line)) {
-            this.sentencies = [ new Sentense(line.variants) ];
+            this.sentencies = [ new Sentense(line.variants, id) ];
         } else {
-            this.sentencies = [ new Sentense(line) ];
+            this.sentencies = [ new Sentense(line, id) ];
         }
     }
 

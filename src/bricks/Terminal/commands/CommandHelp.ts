@@ -1,18 +1,27 @@
-import { TerminalController } from "../TerminalController";
-import { ICommand } from "../Commander";
+import { Command } from "./Command";
+import { AudioManager } from "../../../utils/AudioManager";
+import { ICmdist } from "../Commander";
 
-export class CommandHelp implements ICommand {
-    public constructor(public controller: TerminalController)  {
+export class CommandHelp extends Command {
+    usage(): string {
+        return "help               - show allowed commands";
     }
 
+    commands: ICmdist | null = null;
+
     public run(cmd: string) {
-        this.controller.showString(`    cat [FILE]         - show file content`);
-        this.controller.showString(`    cd [DIRECTORY]     - move to directory`);
-        this.controller.showString(`    ls                 - list of files in current directory`);
-        this.controller.showString(`    login [USER] [PWD] - log in by another user`);
+        AudioManager.play(AudioManager.ok);
+        for (let [, cmd] of Object.entries(this.commands as ICmdist)) {
+            this.controller.showString(`    ${cmd.usage()}`);        
+        };
+        
 
         // TODO: Commands for current user
 
         this.controller.backControl();
+    }
+
+    public initCommands(commands: ICmdist) {
+        this.commands = commands;
     }
 }

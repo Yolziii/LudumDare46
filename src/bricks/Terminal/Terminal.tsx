@@ -28,7 +28,6 @@ class Terminal extends Component<ITerminalProps> implements IWindowed {
     }
 
     public setWindow = (window: Window): void => {
-        console.log(`Terminal.setWindow()`);
         this.window = window;
     }
 

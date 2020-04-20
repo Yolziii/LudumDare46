@@ -1,20 +1,17 @@
-import { TerminalController } from "../TerminalController";
 import { FileSystem, FilesType, IFsItem } from "../FileSystem";
-import { ICommand } from "../Commander";
+import { Command } from "./Command";
+import { AudioManager } from "../../../utils/AudioManager";
 
-export class CommandLs implements ICommand {
-    public constructor(public controller: TerminalController ) {
-    }
-
+export class CommandLs extends Command {
+    
     public run(cmd: string) {
 
         const files = this.getDirFiles(FileSystem.currentDir);
         if (!files) {
-            this.controller.showString(`No files in directory ${FileSystem.currentDir.path}!`);
-            this.controller.backControl();
-            return;
+            return this.error(`ls: no files in directory ${FileSystem.currentDir.path}`);
         }
 
+        AudioManager.play(AudioManager.ok);
         this.controller.showString(`Files (${files.length}) in directory ${FileSystem.currentDir.path}:`);
         for (let [key, file] of Object.entries(FileSystem.currentDir.files as FilesType)) {
             const isDir = this.getDirFiles(file) !== null;
@@ -28,5 +25,9 @@ export class CommandLs implements ICommand {
     private getDirFiles(directory: IFsItem): IFsItem[] | null {
         if (!directory.files) return null;
         return Object.values(directory.files) 
+    }
+
+    usage(): string {
+        return 'ls                 - list of files in current directory';
     }
 }
