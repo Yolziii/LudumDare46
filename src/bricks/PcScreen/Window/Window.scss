@@ -2,7 +2,12 @@
     height: max-content;
     width: max-content;
     
+    border: #00000022;
+    border-width: 3px;
+    border-style: solid;
+
     &-title {
+        user-select: none;
         width: 100%;
         height: 25px;
 
@@ -20,5 +25,13 @@
             margin-bottom: 2px;
         }
 
+    }
+
+    &-focused {
+        position: absolute;
+        z-index: 99999;
+        border: #00005599;
+        border-width: 3px;
+        border-style: solid;
     }
 }

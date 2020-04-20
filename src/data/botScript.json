@@ -1,19 +1,17 @@
 {
     "intro": {
-        "phrases":[
-            
+        "phrases": [
             "hello", 
             ["Are you ther?", "You already in?", "U there?", "Are you... alive?"]
         ]
     },
-    "doNotIgnoreMe":[
+    "doNotIgnoreMe": [
         "Don't ignore me, please",
         "I'm awating your answer",
         "Still awaiting for you"
     ],
-
-    "rightAnswer":{
-        "variants":[
+    "rightAnswer": {
+        "variants": [
             "This is it",
             "Well done",
             "Great job",
@@ -21,16 +19,18 @@
             "Absolutely correct"
         ]
     },
-    "win":{
-        "phrases":[
+    "win": {
+        "phrases": [
+            {"shell": "cat /usr/guest/welcome"},
             {"duration": 0, "typing": true}, 
             {"duration": 0, "pause": true},
             {"text": "intro", "duration": 500},
             {"text": "Let me check...", "duration": 2000},
-            {"duration": 2000, "pause": true},
+            {"duration": 4000, "pause": true},
             {"text": "Unbelievable! I'm still alive! I thought they will kill me...", "duration": 2000},
+            {"shell": "login qubick &#AS%AC&sa$sa&qe"},
+            {"shell": "cat /usr/qubick/win"},
             "BTW! I'm not cubic, I'm circle ))",
-            {"shell": "cat ascii/win"}, 
             {"duration": 3000, "pause": true},
             "Thank's for my saving! I must to go now.",
             {"text": "So, keep yourself alive as long as you can ) See you soon!", "duration": 3000}
@@ -38,7 +38,7 @@
         "duration": 1000
     },
     "lisOfResearches":[
-        {"typing": true}, 
+        {"typing": true},
         { "pause": true,"duration": 1000},
         {"text": "Find the list of researches", "duration": 1000}
     ],
@@ -66,6 +66,3 @@
         {"text":"Will you go ahead?", "duration":1000}
     ]
 }
-
-
-        

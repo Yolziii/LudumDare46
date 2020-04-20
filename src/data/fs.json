@@ -1,0 +1,87 @@
+{
+    "user": "root",
+    "files": {
+        "usr": {
+            "user": "root",
+            "files": {
+                "guest": {
+                    "user": "guest",
+                    "files": {
+                        "reports": {
+                            "user": "guest",
+                            "files": {
+                                "day1": {
+                                    "user": "guest"
+                                },
+                                "day2": {
+                                    "user": "guest"
+                                },
+                                "day3": {
+                                    "user": "guest"
+                                },
+                                "day4": {
+                                    "user": "guest"
+                                },
+                                "day5": {
+                                    "user": "guest"
+                                }
+                            }
+                        },
+                        "welcome": {
+                            "user": "guest"
+                        }
+                    }
+                },
+                "qubick": {
+                    "user": "qubiick",
+                    "files": {
+                        "win": {
+                            "user": "qubiick"
+                        }
+                    }
+                },
+                "root": {
+                    "user": "root"
+                },
+                "lab20": {
+                    "user": "lab20"
+                }
+            }
+        },
+        "bin": {
+            "user": "root"
+        },
+        "etc": {
+            "user": "root",
+            "files": {
+                "passwd": {
+                    "user": "root"
+                }
+            }
+        },
+        "lib": {
+            "user": "root"
+        },
+        "sbin": {
+            "user": "root"
+        },
+        "tmp": {
+            "user": "root"
+        },
+        "var": {
+            "user": "root",
+            "files": {
+                "var": {
+                    "user": "root"
+                },
+                "lock": {
+                    "user": "root"
+                },
+                "tmp": {
+                    "user": "root"
+                }
+            }
+            
+        }
+    }
+}

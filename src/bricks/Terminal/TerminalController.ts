@@ -30,18 +30,19 @@ export class TerminalController {
     }
 
     public onKey(event: KeyboardEvent<HTMLElement>): void {
-        console.log(`Press key: ${event.key}[${event.keyCode.toString()}]`);
+        if (this.store.locked) return;
+        //console.log(`Press key: ${event.key}[${event.keyCode.toString()}]`);
         const str: CommandString = this.store.current as CommandString;
         if (!str) return;
         switch (event.keyCode) {
             case KeyCode.Up: 
                 const prevCmd = this.commander.previousCommand();
-                if (prevCmd) this.store.replaceString(new CommandString(this.store.user, prevCmd));
+                if (prevCmd) this.store.replaceString(new CommandString(prevCmd));
                 break;
 
             case KeyCode.Down: 
                 const nextCmd = this.commander.nextCommand();
-                if (nextCmd) this.store.replaceString(new CommandString(this.store.user, nextCmd));
+                if (nextCmd) this.store.replaceString(new CommandString(nextCmd));
                 break;
 
             case KeyCode.BackSpace: 
@@ -66,7 +67,7 @@ export class TerminalController {
         if (this.isCommand(this.store.current)) {
             this.store.current.setText(cmd);
         } else {
-            this.store.addString(new CommandString(this.store.user, cmd));
+            this.store.addString(new CommandString(cmd));
         }
         this.commander.run(cmd);
     }
@@ -78,12 +79,18 @@ export class TerminalController {
     isCommand = (sentense: ITerminalString): sentense is CommandString =>
         (sentense as CommandString).addChar !== undefined;
 
-    
+
+    public backControl() {
+        this.store.addString(new CommandString());
+        this.store.locked = false;
+    }
 
     private blinkCursor(): void {
         setTimeout(() => {
+            // TODO: Move this logic to store
             this.store.cursorVisible = !this.store.cursorVisible;
             if (!this.store.focused) this.store.cursorVisible = false;
+            if (this.store.locked) this.store.cursorVisible = false;
             this.blinkCursor();
         }, 500);
     }

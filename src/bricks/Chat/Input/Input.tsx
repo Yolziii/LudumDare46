@@ -30,8 +30,7 @@ class Input extends Component<IInputProps> {
                 <div 
                     className="Input-input" 
                     tabIndex={1}
-                    onKeyDown={this.props.controller.onKey}
-                    onPaste={this.props.controller.onPaste}>
+                    >
                     
                     <div className="text" ref={this.textRef}>{this.props.store.currentText}</div>
                     <ChatCursor store={this.props.store} />

@@ -1,7 +1,7 @@
 import {observable, computed} from 'mobx';
-import { User } from './User';
 import { stripHtml } from '../../utils/utils';
 import data from '../../data/terminal.json';
+import { FileSystem } from './FileSystem';
 
 export const TERMINAL_WIDTH = 80;
 export const TERMINAL_HEIGHT = 25;
@@ -35,8 +35,8 @@ export class CommandString implements ITerminalString {
 
     @computed get length() { return stripHtml(this.value).length }
 
-    public constructor(private user: User, content: string = '') {
-        this.welcome = `<span class="notSelectable"><span class="userName">@${user.name}</span>: ></span>`;
+    public constructor(content: string = '') {
+        this.welcome = `<span class="notSelectable"><span class="userName">@${FileSystem.currentUser}</span>: ></span>`;
         this.content = content;
     }
 
@@ -61,11 +61,12 @@ export class CommandString implements ITerminalString {
 }
 
 export class TerminalStore {
-    public constructor(public user: User) {
-        this.addString(new SimpleString(data.welcome.replace('#user', user.name)))
-        this.addString(new CommandString(user));
+    public constructor() {
+        this.addString(new SimpleString(data.welcome.replace('#user', FileSystem.currentUser)))
+        this.addString(new CommandString());
     }
 
+    @observable locked = false;
     @observable offset = 0;
     @observable cursorVisible = true;
     @observable strings:  ITerminalString[] = []; 

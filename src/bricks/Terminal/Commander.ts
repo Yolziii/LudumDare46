@@ -3,6 +3,10 @@ import { TerminalStore, SimpleString, CommandString } from './TernimalStore';
 import { AudioManager } from '../../utils/AudioManager';
 import { CommandCat } from './commands/CommandCat';
 import { TerminalController } from './TerminalController';
+import { CommandLs } from './commands/CommandLs';
+import { CommandCd } from './commands/CommandCd';
+import { CommandHelp } from './commands/CommandHelp';
+import { CommandLogin } from './commands/CommandLogin';
 
 interface ICommandDescription {
     description: string;
@@ -12,19 +16,31 @@ interface ICommandList {
     [key: string]: ICommandDescription;
 }
 
-export class Commander {
+export interface ICommand {
+    run(cmd: string): void;
+}
 
-    public constructor(private store: TerminalStore, private controller: TerminalController) {
-    }
+export class Commander {
+    cmds: {[key: string]: ICommand}
 
     commands: string[] = [];
     commandIndex = -1;
+
+    public constructor(private store: TerminalStore, private controller: TerminalController) {
+        this.cmds = {
+            'cat' : new CommandCat(controller),
+            'help' : new CommandHelp(controller),
+            'ls' : new CommandLs(controller),
+            'cd' : new CommandCd(controller),
+            'login' : new CommandLogin(controller),
+        }
+    }
     
     run(cmd: string) {
         const commands = commandList as ICommandList;
         cmd = cmd.trim();
         if (cmd === '') {
-            this.store.addString(new CommandString(this.store.user));
+            this.store.addString(new CommandString());
             return;
         }
 
@@ -33,24 +49,20 @@ export class Commander {
             this.commandIndex = this.commands.length;
         }
 
-        console.log(cmd.substr(0, 3));
-        if (cmd.substr(0, 3) === 'cat') {
-            const catCmd = new CommandCat(this.controller, cmd);
-            catCmd.run();
-            return;
+        for (let [key, command] of Object.entries(this.cmds)) {
+            if (cmd.substr(0, key.length) === key) {
+                this.store.locked = true;
+                command.run(cmd);
+                return;
+            }
         }
 
         if (!commands[cmd]) {          
             AudioManager.play(AudioManager.errorAudio);
             this.store.addString(new SimpleString("ERROR! Unknown command!", 'commandError'));
-            this.store.addString(new CommandString(this.store.user));
+            this.store.addString(new CommandString());
             return 
         }
-
-       
-        
-        // TODO: An access
-        // TODO: Run commands
     }
 
     nextCommand(): string {

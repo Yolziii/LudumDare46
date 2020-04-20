@@ -1,4 +1,4 @@
-class AudionManager {
+class AudioManagerImpl {
     public errorAudio = new Audio(process.env.PUBLIC_URL + '/sound/error.wav');
     public playerMessage = new Audio(process.env.PUBLIC_URL + '/sound/message.wav?v=2');
     public guideMessage = new Audio(process.env.PUBLIC_URL + '/sound/message2.wav');
@@ -20,4 +20,4 @@ class AudionManager {
     }
 }
 
-export const AudioManager = new AudionManager();
+export const AudioManager = new AudioManagerImpl();

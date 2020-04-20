@@ -16,7 +16,8 @@ class Cursor extends Component<ICursorProps> {
         const store = this.props.store;
         return (
             <div 
-                className="Cursor"            >
+                className="Cursor"
+            >
                 {store.cursorVisible &&
                     <div 
                         className="Cursor-line"
