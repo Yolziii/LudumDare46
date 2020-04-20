@@ -1,8 +1,8 @@
 {
     "chatTutorial-intro": {
         "phrases": [
-            {"shell": "cat welcome"},
-            {"duration": 500, "pause": true},
+            {"duration": 1000, "pause": true},
+            {"chat": "1"},
             {"duration": 500, "typing": true}, 
             "hello"
         ]
@@ -26,82 +26,58 @@
         ],
         "duration": 150
     },
+   
     "chatTutorial-end": {
         "phrases": [
-            "Ah, you there! Thanks Good!!!",
+            "Ah, you are there! Thanks Good!!!",
             "Listen",
-            {"text": "They do experiments. It’s illegal!!", "duration": 4000},
-            {"text": "If we don't stop them, they kill the creature", "duration": 5000},
-            "We need to hurry up!"
+            {"text": "They do illegal experiments!! If we don't free the creature, they will kill it", "duration": 6000},
+            {"duration": 2000, "pause": true},
+            "I'm copying terminal to your desktop... one sec",
+            {"duration": 1000, "pause": true},
+            {"text": "Okay, done. Start it!", "duration": 0},
+            {"terminal": "1"}
         ]
     },
 
+    "chatTutorial-startTerminal": {
+        "variants": [
+            [
+                "Do you see it? It is an icon on your desktop",
+                "The black one",
+                "With the sign - 'Start terminal'",
+                "You need double click on it!",
+                "click on it twice"
+            ]
+        ],
+        "duration": 150
+    },
+    
+
     "terminalTutorial-intro": {
         "phrases": [
-            "Insider will help us"
+            {"shell": "cat welcome"},
+            "Ah )) Okay..",
+            {"text": "My insider leave to us hidden PROMPTS inside guest files. Something the RED ONE, I don't know what does it mean.", "duration": 7000},
+            {"duration": 5000, "pause": true},
+            {"text": "We need to login as another user and open the camera door", "duration": 5000}
         ]
     },
 
     "terminalTutorial-helpCmd": {
         "phrases": [
-            "Use help command"
+            "Firstival, type the help command. then, you sho@#$RFa ",
+            {"duration": 15000, "pause": true},
+            "O, NO! I must to go, I wiil back!",
+            {"duration": 3000, "pause": true},
+            {"chat": "0"}
         ]
     },
 
-    "terminalTutorial-lsCmd": {
-        "phrases": [
-            "Use ls command"
-        ]
-    },
-
-    "terminalTutorial-cdCmd": {
-        "phrases": [
-            "Use cd command"
-        ]
-    },
-
-    "terminalTutorial-catCmd": {
-        "phrases": [
-            "Use cat command"
-        ]
-    },
-
-    "terminalTutorial-loginCmd": {
-        "phrases": [
-            "Use cat command"
-        ]
-    },
-
-    "terminalTutorial-end": {
-        "phrases": [
-            "yes, we are lab20 user now!"
-        ]
-    },
-
-    "terminalTutorial-usePassword": {
-        "phrases": [
-            "What this?",
-            "Let me check",
-            "Oh, it WAS password, got it! Sorry ))"
-        ]
-    },
-
-    "doNotIgnoreMe": [
-        "Don't ignore me, please",
-        "I'm awating your answer",
-        "Still awaiting for you"
-    ],
-    "rightAnswer": {
-        "variants": [
-            "This is it",
-            "Well done",
-            "Great job",
-            "Correct",
-            "Absolutely correct"
-        ]
-    },
     "win": {
         "phrases": [
+            {"duration": 1000, "pause": true},
+            {"chat": "1"},
             {"duration": 2000, "pause": true},
             {"text": "intro", "duration": 500},
             {"text": "Let me check...", "duration": 2000},
@@ -116,32 +92,25 @@
         ],
         "duration": 1000
     },
-    "lisOfResearches":[
-        {"typing": true},
-        { "pause": true,"duration": 1000},
-        {"text": "Find the list of researches", "duration": 1000}
-    ],
-    "illigalExp":{
-        "phrases":[
-       
-        {"typing": true, "duration": 2000}
-        ]
-    },
-    "openFiles":[
-        {"text":"Did you find? Open it."},
-        {"text":"See a lot of files???"},
-        {"typing": true, "duration": 1000}
-    ],
-    "labNum":[
-        {"text":"Find laboratory num in last report", "duration": 1000},
-        {"typing": true, "duration": 1000},
-        {"text":"Give me this number, I can hack the lock", "duration":500},
-        {"typing":true, "duration":1000}
-    ],
-    "accessToSecretInfo":[
-        "One second…",
-        {"text":"YES!! TNX. We won a little time for it!", "duration":1000},
-        {"text":"We get access to secret info!", "duration":1000},
-        {"text":"Will you go ahead?", "duration":1000}
-    ]
+
+    "lose": {
+        "phrases": [
+            {"duration": 1000, "pause": true},
+            {"chat": "1"},
+            {"duration": 2000, "pause": true},
+            {"text": "OHH! NOWW!! ", "duration": 500},
+            {"text": "WHAT HAVE YOU DONE!!!!", "duration": 2000},
+            {"duration": 4000, "pause": true},
+            {"text": "Unbelievable! You killed me... Why?? What for?", "duration": 2000},
+            {"shell": "login qubick &#AS%AC&sa$sa&qe"},
+            {"shell": "cat lose"},
+            {"text": "So...", "duration": 3000},
+            {"text": "you...", "duration": 3000},
+            {"text": "smarter..", "duration": 3000},
+            {"text": "th", "duration": 3000},
+            {"duration": 3000, "pause": true},
+            {"chat": 0}
+        ],
+        "duration": 1000
+    }
 }

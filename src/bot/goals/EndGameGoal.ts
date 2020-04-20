@@ -8,10 +8,14 @@ export class EndGameGoal extends BotGoal {
 
     private totalRequests = 0;
 
+    constructor(private scenario: string) {
+        super();
+    }
+
     get tasks(): Task[] {
         this.totalRequests++;
         if (this.totalRequests === 1) {
-            return this.fillTasks('win');
+            return this.fillTasks(this.scenario);
         }
         return this.waitingTasks();
     }

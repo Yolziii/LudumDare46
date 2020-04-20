@@ -4,7 +4,7 @@ import './LoginBtn.scss'
 import { FileSystem } from '../../Terminal/FileSystem';
 import { BotMind } from '../../../bot/BotMind';
 import { TerminalStore, SimpleString, CommandString } from '../../Terminal/TernimalStore';
-import data from '../../../data/terminal.json';
+import { AudioManager } from '../../../utils/AudioManager';
 
 interface ILoginBtnProps {
     botMind: BotMind;
@@ -13,8 +13,8 @@ interface ILoginBtnProps {
 
 class LoginBtn extends Component<ILoginBtnProps> {
     onClick = (e: React.MouseEvent) => {
+        AudioManager.play(AudioManager.ok);
         FileSystem.currentUser = 'guest';
-        this.props.store.addString(new SimpleString(data.welcome.replace('#user', FileSystem.currentUser)))
         this.props.store.addString(new CommandString());
         
         this.props.botMind.decideWhatToDo();
@@ -27,9 +27,9 @@ class LoginBtn extends Component<ILoginBtnProps> {
             <div className="LoginBtn">
                  <img 
                     className="LoginBtn-logo"
-                    src={process.env.PUBLIC_URL + '/img/logo.png'}  />
+                    src={process.env.PUBLIC_URL + '/img/logo-big.png'}  />
                  <div className="LoginBtn-button" onClick={this.onClick}>
-                    Login as guest
+                    Start game
                  </div>
             </div>
         );

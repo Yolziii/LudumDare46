@@ -2,15 +2,11 @@ import { Task } from "../BotMind";
 import { BotGoal } from "./BotGoal";
 import { IPlayerAction } from "../../player/PlayerMind";
 import { EndGameGoal } from "./EndGameGoal";
+import { AppStore } from "../../bricks/PcScreen/AppStore";
 
 enum State {
     Intro,
     TypeHelp,
-    FileList,
-    MoveToReports,
-    FindDate,
-    LoginAsLab20,
-    EndTerminalTutorial,
     Waiting
 }
 
@@ -19,9 +15,6 @@ export class TerminalTutorialGoal extends BotGoal {
     itFinished: boolean = false;
     
     wasHelp = false;
-    wasLs = false;
-    wasCat = false;
-    wasCd = false;
     wasLogin = false;
 
     state = State.Intro;
@@ -36,26 +29,6 @@ export class TerminalTutorialGoal extends BotGoal {
                 this.state = State.Waiting;
                 return this.fillTasks('terminalTutorial-helpCmd');
 
-            case State.FileList:
-                this.state = State.Waiting;
-                return this.fillTasks('terminalTutorial-lsCmd');
-
-            case State.MoveToReports:
-                this.state = State.Waiting;
-                return this.fillTasks('terminalTutorial-cdCmd');
-
-            case State.FindDate:
-                this.state = State.Waiting;
-                return this.fillTasks('terminalTutorial-catCmd');
-
-            case State.LoginAsLab20:
-                this.state = State.Waiting;
-                return this.fillTasks('terminalTutorial-loginCmd');
-
-            case State.EndTerminalTutorial:
-                this.itFinished = true; 
-                return this.fillTasks('terminalTutorial-end');
-
             default:
             case State.Waiting:
                 this.state = this.nextState();
@@ -63,14 +36,10 @@ export class TerminalTutorialGoal extends BotGoal {
         }
     }
 
-    get nextGoal(): BotGoal {return new EndGameGoal()};
+    get nextGoal(): BotGoal | null {return null};
  
     private nextState(): State {
-        if (this.wasLogin) return State.EndTerminalTutorial;
-        if (this.wasCat) return State.LoginAsLab20;
-        if (this.wasCd) return State.FindDate;
-        if (this.wasLs) return State.MoveToReports;
-        if (this.wasHelp) return State.FileList;
+        if (!AppStore.chatStore.active) return State.Waiting;
         return State.TypeHelp;
     }
 
@@ -79,27 +48,9 @@ export class TerminalTutorialGoal extends BotGoal {
         if (!this.isTerminalCommandAction(action)) return;
         
         if (action.name === 'help' && action.success) {
-            if (this.state === State.TypeHelp) this.state = State.FileList;
+            if (this.state === State.TypeHelp) this.state = State.Waiting;
             this.wasHelp = true;
 
-        }
-        if (action.name === 'ls' && action.success) {
-            if (this.state === State.FileList) this.state = State.MoveToReports;
-            this.wasLs = true;
-        }
-        if (action.name === 'cd' && action.success) {
-            if (this.state === State.MoveToReports) this.state = State.FindDate;
-            this.wasCd = true;
-        }
-        if (action.name === 'cat' && action.success) {
-            if (this.state === State.FindDate) this.state = State.LoginAsLab20;
-            this.wasCat = true;
-        }
-        
-        if (action.name === 'login' && action.success) {
-            if (this.state === State.LoginAsLab20) this.state = State.EndTerminalTutorial;
-            // TODO: Wrong login
-            this.wasLogin = true;
         }
     }
 }

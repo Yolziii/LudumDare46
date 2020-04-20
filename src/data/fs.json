@@ -15,6 +15,7 @@
                         "day3a": {"user": "guest"},
                         "day4": {"user": "guest"},
                         "day4a": {"user": "guest"},
+                        "remainder": {"user": "guest"},
                         "welcome": {
                             "user": "guest"
                         }
@@ -31,13 +32,15 @@
                 "root": {
                     "user": "root",
                     "files": {
-                        "remark": {
-                            "user": "root"
-                        }
+                        "remainder": {"user": "root"}
                     }
                 },
                 "lab20": {
-                    "user": "lab20"
+                    "user": "lab20",
+                    "files": {
+                        "remainder": {"user": "lab20"},
+                        "day4a": {"user": "lab20"}
+                    }
                 }
             }
         },

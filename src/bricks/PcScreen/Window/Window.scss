@@ -27,6 +27,14 @@
 
     }
 
+    .autofocused {
+        position: absolute;
+        z-index: 99999;
+        border: #00005599;
+        border-width: 3px;
+        border-style: solid;
+    }
+
     &-focused {
         position: absolute;
         z-index: 99999;

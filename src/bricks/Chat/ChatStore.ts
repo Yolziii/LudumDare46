@@ -24,6 +24,7 @@ export class ChatStore {
     @observable messages: ChatMessage[] = [];
     @observable cursorVisible = false;
 
+    @observable active = false;
     @observable botTyping = false;
     @observable focused = false;
     @computed get cursorX() {return this.currentText.length + 1}

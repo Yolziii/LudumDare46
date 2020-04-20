@@ -62,6 +62,8 @@ export class CommandString implements ITerminalString {
 
 export class TerminalStore {
 
+    @observable available = false;
+    @observable active = false;
     @observable locked = false;
     @observable offset = 0;
     @observable cursorVisible = true;

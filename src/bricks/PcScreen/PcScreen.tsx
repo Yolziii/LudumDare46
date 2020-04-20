@@ -8,6 +8,7 @@ import { AppStore } from './AppStore';
 import { FileSystem } from '../Terminal/FileSystem';
 import LoginBtn from './LoginBtn/LoginBtn';
 import { observer } from 'mobx-react';
+import Scoutch from './Scoutch/Scoutch';
 
 @observer
 class PcScreen extends Component {
@@ -37,30 +38,37 @@ class PcScreen extends Component {
                 <img 
                     className="PcScreen-logo"
                     src={process.env.PUBLIC_URL + '/img/logo.png'}  />
-                    
-                <Window 
-                    className="PcScreen-terminalPosition" 
-                    title="Terminal"
-                    childRef={this.terminalRef}
-                >
-                    <Terminal 
-                        ref={this.terminalRef}
-                        store={AppStore.terminalStore} 
-                        controller={AppStore.terminalController} />
-                </Window>
 
-                <Window 
-                    className="PcScreen-chatPosition" 
-                    title="Chat with @qubick"
-                    childRef={this.chatRef}
-                >
-                    <Chat
-                        ref={this.chatRef }
-                        store={AppStore.chatStore} 
-                        controller={AppStore.chatController} 
-                        botModel={AppStore.botModel}
-                        botMind={AppStore.botMind} />
-                </Window>
+                <Scoutch store={AppStore.terminalStore} />
+
+                {AppStore.terminalStore.active && 
+                    <Window 
+                        className="PcScreen-terminalPosition" 
+                        title="Terminal"
+                        childRef={this.terminalRef}
+                    >
+                        <Terminal 
+                            ref={this.terminalRef}
+                            store={AppStore.terminalStore} 
+                            controller={AppStore.terminalController} />
+                    </Window>
+                }
+
+                {AppStore.chatStore.active && 
+                    <Window 
+                        className="PcScreen-chatPosition" 
+                        title="Chat with @qubick"
+                        childRef={this.chatRef}
+                    >
+                        <Chat
+                            ref={this.chatRef }
+                            store={AppStore.chatStore} 
+                            controller={AppStore.chatController} 
+                            botModel={AppStore.botModel}
+                            botMind={AppStore.botMind} />
+                    </Window>
+                }
+                
             </div>
         );
     }

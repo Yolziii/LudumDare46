@@ -33,9 +33,18 @@ export type ExplicitTypingType = {typing: boolean, duration: number}
 export type TerminalCommandType = {shell: string}
 export type ExplicitPauseType = {pause: boolean, duration: number}
 //sexport type MergesPhraseType = { merge: SimplePartType[], duration?: number }
-export type SentenseType = SimplePartType | CustomDurationSentenseType | ExplicitTypingType | ExplicitPauseType | TerminalCommandType;
+export type SentenseType = 
+    SimplePartType | 
+    CustomDurationSentenseType | 
+    ExplicitTypingType | 
+    ExplicitPauseType | 
+    TerminalCommandType | 
+    TerminalVisibilityType |
+    ChatVisibilityType;
 export type PhrasesType = {phrases: SentenseType[], duration?: number}
 export type VariantsType = {variants: SentenseType}
+export type TerminalVisibilityType = {terminal: string}
+export type ChatVisibilityType = {chat: string}
 export type ScriptLineType = VariantsType | PhrasesType | SentenseType
 export type ScriptDataType = { [key: string]: ScriptLineType[] }
 
@@ -97,6 +106,18 @@ export class Sentense {
             this.one = sentense.shell;
             this.duration = 0;
         }
+        else if (this.isTerminalVisibility(sentense)) {
+            this.actionType = BotActionType.TerminalVisibility;
+            this.kind = SentenceKind.One;
+            this.one = sentense.terminal;
+            this.duration = 0;
+        }
+        else if (this.isChatisibility(sentense)) {
+            this.actionType = BotActionType.ChatVisibility;
+            this.kind = SentenceKind.One;
+            this.one = sentense.chat;
+            this.duration = 0;
+        }
         else {
             this.actionType = BotActionType.SaySomething;
             this.kind = SentenceKind.One;
@@ -120,6 +141,10 @@ export class Sentense {
         (sentense as ExplicitPauseType).pause !== undefined;
     isTerminalCommand = (sentense: SentenseType): sentense is TerminalCommandType =>
         (sentense as TerminalCommandType).shell !== undefined;
+    isTerminalVisibility = (sentense: SentenseType): sentense is TerminalVisibilityType =>
+        (sentense as TerminalVisibilityType).terminal !== undefined;
+    isChatisibility = (sentense: SentenseType): sentense is ChatVisibilityType =>
+        (sentense as ChatVisibilityType).chat !== undefined;
 
     chooseOne() {
         switch (this.kind) {

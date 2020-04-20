@@ -4,6 +4,8 @@ class AudioManagerImpl {
     public guideMessage = new Audio(process.env.PUBLIC_URL + '/sound/message2.wav');
     public guideWin = new Audio(process.env.PUBLIC_URL + '/sound/win.wav');
     public ok = new Audio(process.env.PUBLIC_URL + '/sound/ok.wav');
+    public chatOn = new Audio(process.env.PUBLIC_URL + '/sound/chat-on.wav');
+    
 
     public play(audio: HTMLAudioElement) {
         audio.autoplay = true;

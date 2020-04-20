@@ -12,7 +12,7 @@ export interface IWindowed {
 }
 
 export class Window extends Component<IWindowProps> {
-    focusedClass: string = '';
+    focusedClass: string = 'autofocused';
 
     componentDidMount() {
         (this.props.childRef.current as IWindowed).setWindow(this);

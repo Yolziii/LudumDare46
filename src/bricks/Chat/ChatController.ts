@@ -2,7 +2,6 @@ import { ChatStore } from "./ChatStore";
 import { KeyCode } from "../../utils/KeyCode";
 import { KeyboardEvent } from "react";
 import { BotMind } from "../../bot/BotMind";
-import { runInThisContext } from "vm";
 import { PlayerChatMessageAction } from "../../player/PlayerMind";
 
 export class ChatController {

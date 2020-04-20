@@ -8,6 +8,8 @@ import { CommandHelp } from './commands/CommandHelp';
 import { CommandLogin } from './commands/CommandLogin';
 import { Command } from './commands/Command';
 import { CommandUsers } from './commands/CommandUsers';
+import { CommandPoison } from './commands/CommandPoison';
+import { CommandUnlock } from './commands/CommandUnlock';
 
 export interface ICmdist {
     [key: string]: Command;
@@ -19,12 +21,15 @@ class CommandsImpl {
     get commands(): ICmdist {return this.cmds as ICmdist}
 
     initCommands(controller: TerminalController) {
+        // TODO: Lock command (to stop antoganist)
         this.cmds = {
             'cat' : new CommandCat(controller),
             'help' : new CommandHelp(controller),
             'ls' : new CommandLs(controller),
             'cd' : new CommandCd(controller),
             'login' : new CommandLogin(controller),
+            'poison' : new CommandPoison(controller),
+            'unlock' : new CommandUnlock(controller),
             'users' : new CommandUsers(controller),
         };
     }

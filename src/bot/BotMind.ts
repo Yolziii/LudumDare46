@@ -4,13 +4,18 @@ import { IPlayerAction } from "../player/PlayerMind";
 import { Sentense } from "./SayingBuider";
 import { TerminalController } from "../bricks/Terminal/TerminalController";
 import { BotGoal } from "./goals/BotGoal";
+import { AppStore } from "../bricks/PcScreen/AppStore";
+import { AudioManager } from "../utils/AudioManager";
+import { throws } from "assert";
 
 export enum BotActionType {
     Typing, 
     WaitForPlayer,
     SaySomething,
     TerminalCommand,
-    StopThinking
+    StopThinking,
+    TerminalVisibility,
+    ChatVisibility,
 }
 
 export class BotAction {
@@ -43,6 +48,15 @@ export class BotMind {
         goal.initBotMind(this);
     }
 
+    setGoal(goal: BotGoal) {
+        if (AppStore.gameOver) return;
+        AppStore.gameOver = true;
+        this.goal = goal;
+        goal.initBotMind(this);
+        this.taskIndex = -1;
+        this.think();
+    }
+
     playerAction(action: IPlayerAction) {
         this.goal.onPlayerAction(action);
     }
@@ -71,6 +85,12 @@ export class BotMind {
                 break;
             case BotActionType.TerminalCommand: 
                 this.typeCommand((task.action.sentense as Sentense).one);
+                break;
+            case BotActionType.TerminalVisibility: 
+                this.setTerminalVisibility((task.action.sentense as Sentense).one === "1");
+                break;
+            case BotActionType.ChatVisibility: 
+                this.setChatVisibility((task.action.sentense as Sentense).one === "1");
                 break;
         }
     } 
@@ -110,6 +130,17 @@ export class BotMind {
         }
         this.tasks = this.goal.tasks;
         this.taskIndex = -1;
+        this.think();
+    }
+
+    setTerminalVisibility(visibility: boolean) {
+        AppStore.terminalStore.available = visibility; // TODO: injections
+        this.think();
+    }
+
+    setChatVisibility(visibility: boolean) {
+        AudioManager.play(AudioManager.chatOn);
+        AppStore.chatStore.active = visibility;
         this.think();
     }
 }
