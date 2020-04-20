@@ -29,7 +29,7 @@
    
     "chatTutorial-end": {
         "phrases": [
-            "Ah, you are there! Thanks Good!!!",
+            "Ah, you are there! Thanks God!!!",
             "Listen",
             {"text": "They do illegal experiments!! If we don't free the creature, they will kill it", "duration": 6000},
             {"duration": 2000, "pause": true},
@@ -58,9 +58,11 @@
         "phrases": [
             {"shell": "cat welcome"},
             "Ah )) Okay..",
-            {"text": "My insider leave to us hidden PROMPTS inside guest files. Something the RED ONE, I don't know what does it mean.", "duration": 7000},
+            {"text": "At the end we need to login as another user and open the camera door", "duration": 5000},
             {"duration": 5000, "pause": true},
-            {"text": "We need to login as another user and open the camera door", "duration": 5000}
+            {"text": "But first, you need to read carefully guest files", "duration": 5000},
+            {"text": "My insider leave to us hidden PROMPTS inside them. Locked the RED ONE", "duration": 7000},
+            {"duration": 5000, "pause": true}
         ]
     },
 
@@ -69,7 +71,7 @@
             "Firstival, type the help command. then, you sho@#$RFa ",
             {"duration": 15000, "pause": true},
             "O, NO! I must to go, I wiil back!",
-            {"duration": 3000, "pause": true},
+            {"duration": 10000, "pause": true},
             {"chat": "0"}
         ]
     },
