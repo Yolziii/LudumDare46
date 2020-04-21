@@ -1,6 +1,7 @@
 {
     "chatTutorial-intro": {
         "phrases": [
+            {"terminal": "1"},
             {"duration": 1000, "pause": true},
             {"chat": "1"},
             {"duration": 500, "typing": true}, 

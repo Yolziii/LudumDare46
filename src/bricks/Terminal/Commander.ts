@@ -10,6 +10,7 @@ import { Command } from './commands/Command';
 import { CommandUsers } from './commands/CommandUsers';
 import { CommandPoison } from './commands/CommandPoison';
 import { CommandUnlock } from './commands/CommandUnlock';
+import { AppStore } from '../PcScreen/AppStore';
 
 export interface ICmdist {
     [key: string]: Command;
@@ -46,6 +47,7 @@ export class Commander {
     }
     
     run(cmd: string): boolean {
+        if (AppStore.terminalStore.locked) return false;
         cmd = cmd.trim();
         if (cmd === '') {
             this.store.addString(new CommandString());
