@@ -25,7 +25,7 @@ export class CommandLogin extends Command {
             if (user === newUser) {
                 findUser = true;
                 // eslint-disable-next-line eqeqeq
-                if ((newPwd as any).hashCode() == pwd) {
+                if (newPwd && (newPwd as any).hashCode() == pwd) {
                     rightPwd = true;
                 }
             }
