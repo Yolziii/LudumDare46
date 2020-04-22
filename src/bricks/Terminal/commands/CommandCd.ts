@@ -4,6 +4,10 @@ import { AudioManager } from "../../../utils/AudioManager";
 
 export class CommandCd extends Command {
     public run(cmd: string): boolean {
+        if (FileSystem.currentUser !== 'root') {
+            return this.error("access denied!", true);
+        }
+
         let file = cmd.substring(3).trim();
         if (file.substring(file.length-1) === '/') {
             file = file.substring(0, file.length-1);

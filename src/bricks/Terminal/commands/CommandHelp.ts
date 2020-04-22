@@ -9,7 +9,9 @@ export class CommandHelp extends Command {
         this.controller.showString(`Available commands:`);       
         for (let [key, cmd] of Object.entries(Commands.commands as ICmdist)) {
             if (key === 'poison' && FileSystem.currentUser !== 'root') continue;
+            if (key === 'cd' && FileSystem.currentUser !== 'root') continue;
             if (key === 'unlock' && FileSystem.currentUser === 'guest') continue;
+            
             this.controller.showString(`    ${cmd.usage()}`);        
         };
         
