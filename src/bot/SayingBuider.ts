@@ -152,7 +152,6 @@ export class Sentense {
                 let choiseIndex = ScriptIndexes.getIndex(this.id);
                 if (choiseIndex >= this.many.length) {
                     choiseIndex %= this.many.length;
-                    console.log(`this.choiseIndex: ${ choiseIndex}`);
                 }
 
                 const line = this.many[choiseIndex];

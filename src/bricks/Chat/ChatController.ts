@@ -51,6 +51,7 @@ export class ChatController {
     }
 
     public onKey(event: KeyboardEvent<HTMLElement>): void {
+        event.preventDefault();
         //console.log(`Press key: ${event.key}[${event.keyCode.toString()}]`);
         switch (event.keyCode) {
             case KeyCode.Up: 

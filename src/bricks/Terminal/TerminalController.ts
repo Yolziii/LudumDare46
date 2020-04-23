@@ -37,6 +37,8 @@ export class TerminalController {
     }
 
     public onKey(event: KeyboardEvent<HTMLElement>): void {
+        event.preventDefault();
+        
         if (this.store.locked) return;
         //console.log(`Press key: ${event.key}[${event.keyCode.toString()}]`);
         const str: CommandString = this.store.current as CommandString;
